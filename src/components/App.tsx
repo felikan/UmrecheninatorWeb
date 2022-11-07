@@ -24,11 +24,11 @@ function App() {
   const [inputValue, setInputValue] = useState<number>(0);
   const [optionActive, setOptionActive] = useState<number>(1);
   const [inputValueUnitOptions, setInputValueUnitOptions] = useState<
-    { value: number; label: string; active: boolean }[]
+    { value: number; label: string }[]
   >([
-    { value: 1000, label: "km", active: false },
-    { value: 1, label: "m", active: true },
-    { value: 0.01, label: "cm", active: false },
+    { value: 1000, label: "km" },
+    { value: 1, label: "m" },
+    { value: 0.01, label: "cm" },
   ]);
 
   const onErleuchtinierung = () => {
@@ -41,10 +41,7 @@ function App() {
 
     newArr.map((element, i) => {
       if (element.value === e.value) {
-        newArr[i].active = true;
         setOptionActive(newArr[i].value);
-      } else {
-        newArr[i].active = false;
       }
     });
 

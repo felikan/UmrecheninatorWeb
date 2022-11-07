@@ -3,7 +3,8 @@ import React from "react";
 interface Props {
   allUntis: { unitName: string; unitSize: number }[];
   inputValue: number;
-  inputValueUnitOptions: { value: number; label: string; active: boolean }[];
+  inputValueUnitOptions: { value: number; label: string }[];
+
   optionActive: number;
 }
 

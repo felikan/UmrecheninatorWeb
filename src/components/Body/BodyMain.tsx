@@ -5,7 +5,8 @@ import Units from "./BodyUnitContainer/Units";
 interface Props {
   allUnits: { unitName: string; unitSize: number }[];
   inputValue: number;
-  inputValueUnitOptions: { value: number; label: string; active: boolean }[];
+  inputValueUnitOptions: { value: number; label: string }[];
+
   optionActive: number;
 }
 

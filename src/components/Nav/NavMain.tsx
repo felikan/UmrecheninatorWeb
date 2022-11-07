@@ -4,8 +4,8 @@ import Select from "react-select";
 interface Props {
   onErleuchtinierung: () => void;
   inputValueRef: React.Ref<HTMLInputElement>;
-  onSelectChange: () => void;
-  inputValueUnitOptions: { value: number; label: string; active: boolean }[];
+  onSelectChange: (e: any) => void;
+  inputValueUnitOptions: { value: number; label: string }[];
   selectRef: any;
 }
 
