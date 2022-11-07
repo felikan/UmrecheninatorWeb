@@ -1,20 +1,34 @@
-import React from 'react';
+import React from "react";
+import Select from "react-select";
 
-function NavMain() {
-    return (
-        <>
-        <header>
-            <input type="number" id="value"/>
-            <select name="unit" id="unit">
-                <option value="km">km</option>
-                <option value="m" selected>m</option>
-                <option value="cm">cm</option>
-            </select>
-            <button id="enter">Erleuchtiniere Mich!</button>
-        </header>
-    <div><hr/></div>
-        </>
-    );
+interface Props {
+  onErleuchtinierung: () => void;
+  inputValueRef: React.Ref<HTMLInputElement>;
+  onSelectChange: () => void;
+  inputValueUnitOptions: { value: number; label: string; active: boolean }[];
+  selectRef: any;
+}
+
+function NavMain(props: Props) {
+  return (
+    <>
+      <header className="is-flex">
+        <input ref={props.inputValueRef} type="number" id="value" />
+        <Select
+          ref={props.selectRef}
+          onChange={props.onSelectChange}
+          options={props.inputValueUnitOptions}
+          defaultValue={props.inputValueUnitOptions[1]}
+        />
+        <button onClick={props.onErleuchtinierung} id="enter">
+          Erleuchtiniere Mich!
+        </button>
+      </header>
+      <div>
+        <hr />
+      </div>
+    </>
+  );
 }
 
 export default NavMain;
