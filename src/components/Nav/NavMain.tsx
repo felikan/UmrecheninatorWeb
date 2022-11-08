@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "react-select";
+import "../../styles/Nav.css"
 
 interface Props {
   onErleuchtinierung: () => void;
@@ -19,6 +20,7 @@ function NavMain(props: Props) {
           onChange={props.onSelectChange}
           options={props.inputValueUnitOptions}
           defaultValue={props.inputValueUnitOptions[1]}
+          classNamePrefix="select"
         />
         <button onClick={props.onErleuchtinierung} id="enter">
           Erleuchtiniere Mich!
