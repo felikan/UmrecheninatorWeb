@@ -9,12 +9,13 @@ interface Props {
 }
 
 function Units(props: Props) {
+  console.log(props.inputValue)
   return (
     <>
       {props.allUntis.map((e, i) => (
         <tbody key={i}>
           <tr>
-            <td>{e.unitName}</td>
+            <td>{"in " + e.unitName}</td>
             <td>{(props.inputValue * props.optionActive) / e.unitSize}</td>
           </tr>
         </tbody>

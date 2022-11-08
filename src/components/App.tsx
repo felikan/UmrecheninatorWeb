@@ -12,15 +12,15 @@ function App() {
   const [allUnits, setAllUnits] = useState<
     { unitName: string; unitSize: number }[]
   >([
-    { unitName: "in Ford Mondeos", unitSize: 4.456 },
-    { unitName: "in Club Mate Flaschen", unitSize: 0.24 },
-    { unitName: "in Samsung GU50AU7199UXZG LED-Fernseher", unitSize: 1.1168 },
-    { unitName: "in Längen der Titanic", unitSize: 269 },
-    { unitName: "in Längen des Nil", unitSize: 6693000 },
-    { unitName: "in Erdumfängen am Äquator", unitSize: 40075017 },
-    { unitName: "in 20cm Linealen", unitSize: 0.2 },
-    { unitName: "in Sternburg Flaschen", unitSize: 0.27 },
-    { unitName: "in Elon Musks", unitSize: 1.88 },
+    { unitName: "Ford Mondeos", unitSize: 4.456 },
+    { unitName: "Club Mate Flaschen", unitSize: 0.24 },
+    { unitName: "Samsung GU50AU7199UXZG LED-Fernseher", unitSize: 1.1168 },
+    { unitName: "Längen der Titanic", unitSize: 269 },
+    { unitName: "Längen des Nil", unitSize: 6693000 },
+    { unitName: "Erdumfängen am Äquator", unitSize: 40075017 },
+    { unitName: "20cm Linealen", unitSize: 0.2 },
+    { unitName: "Sternburg Flaschen", unitSize: 0.27 },
+    { unitName: "Elon Musks", unitSize: 1.88 },
   ]);
 
   const [inputValue, setInputValue] = useState<number>(0);
@@ -35,6 +35,7 @@ function App() {
 
   const onErleuchtinierung = () => {
     if (inputValueRef.current === null) return;
+    if(inputValueRef.current.value.length === 0) return
     setInputValue(parseFloat(inputValueRef.current.value));
   };
 
@@ -49,6 +50,7 @@ function App() {
   const onHinzufüginierung = () => {
     if (newInputUnitRef.current === null) return;
     if (newInputSizeRef.current === null) return;
+    if(newInputUnitRef.current.value.length === 0 || newInputSizeRef.current.value.length === 0) return
     const newArray = [...allUnits]
     var isDuplicate = false
     allUnits.map((e) => {
@@ -70,6 +72,8 @@ function App() {
   }
 
   const onLöschinieren = () => {
+    const defaultAllUnitsLength = 9
+    if(allUnits.length === defaultAllUnitsLength) return
     setAllUnits((prevState) => (prevState.slice(0, -1)));
   }
   return (
