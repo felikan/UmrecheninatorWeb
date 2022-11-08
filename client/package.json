@@ -1,10 +1,11 @@
 {
   "name": "umrechinatorweb",
+  "proxy": "http://localhost:5000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 1027",
+    "dev": "vite --port 5000",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

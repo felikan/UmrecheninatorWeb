@@ -18,7 +18,7 @@ database.once('connected', () => {
 
 //server
 const app = express();
-const PORT = 1026
+const PORT = 5000 || process.env.PORT
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use('/api', routes);

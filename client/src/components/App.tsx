@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import "../styles/App.css";
 import NavMain from "./Nav/NavMain";
 import BodyMain from "./Body/BodyMain";
@@ -25,6 +25,7 @@ function App() {
 
   const [inputValue, setInputValue] = useState<number>(0);
   const [optionActive, setOptionActive] = useState<number>(1);
+  const [backendData, setBackendData] = useState<    { unitName: string; unitSize: number }[]>([])
   const [inputValueUnitOptions, setInputValueUnitOptions] = useState<
     { value: number; label: string }[]
   >([
@@ -32,6 +33,13 @@ function App() {
     { value: 1, label: "m" },
     { value: 0.01, label: "cm" },
   ]);
+
+
+  useEffect(() => {
+    fetch("/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
+    console.log(backendData)
+  },[])
+
 
   const onErleuchtinierung = () => {
     if (inputValueRef.current === null) return;
