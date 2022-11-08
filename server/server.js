@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 })
-app.get("/getAll", async (req, res) => {
+app.get("/api/getAll", async (req, res) => {
     try {
         const units = await Model.find();
         console.log(units)
