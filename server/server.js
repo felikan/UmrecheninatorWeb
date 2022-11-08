@@ -18,11 +18,12 @@ database.once('connected', () => {
 
 //server
 const app = express();
+const PORT = 1026
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use('/api', routes);
-app.listen(3000, () => {
-    console.log("Server at 3000");
+app.listen(PORT, () => {
+    console.log(`Server at ${PORT}`);
 })
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
