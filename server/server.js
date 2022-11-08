@@ -31,7 +31,12 @@ app.get("/", (req, res) => {
 app.get("/api/getAll", async (req, res) => {
     try {
         const units = await Model.find();
-        console.log(units)
+        units.map(unit => {
+            unit._id = "jo passt mh"
+            delete unit.__v
+        })
+        
+        console.log(units, "---")
         res.json(units)
     }
     catch(error) {
