@@ -31,13 +31,15 @@ app.get("/", (req, res) => {
 app.get("/api/getAll", async (req, res) => {
     try {
         const units = await Model.find();
+
+        const unitsFormat = []
+
         units.map(unit => {
-            unit._id = "jo passt mh"
-            delete unit.__v
+            unitsFormat.push({unitName: unit.unitName, unitSize: unit.unitSize})
         })
-        
-        console.log(units, "---")
-        res.json(units)
+
+        console.log(unitsFormat, "---")
+        res.json(unitsFormat)
     }
     catch(error) {
         res.status(500).json({message: error.message})
