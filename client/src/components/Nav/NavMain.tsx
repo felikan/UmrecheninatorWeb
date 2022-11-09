@@ -15,7 +15,17 @@ interface Props {
 
 function NavMain(props: Props) {
 
-  return (
+    const customStyles = {
+        control: (base, state) => ({
+            ...base,
+            height: '34px',
+            'min-height': '34px',
+        }),
+
+    };
+
+
+    return (
     <>
       <header className="is-flex">
         <input ref={props.inputValueRef} type="number" id="value" />
@@ -26,6 +36,7 @@ function NavMain(props: Props) {
           defaultValue={props.inputValueUnitOptions[1]}
           classNamePrefix="select"
           id="dropdown"
+          styles={customStyles}
         /> 
         <button onClick={props.onErleuchtinierung} id="enter">
           Erleuchtiniere Mich!
