@@ -21,7 +21,10 @@ function NavMain(props: Props) {
             height: '34px',
             'min-height': '34px',
         }),
-
+        input: (base, state) => ({
+            ...base,
+            "margin-bottom": "30px"
+        })
     };
 
 
