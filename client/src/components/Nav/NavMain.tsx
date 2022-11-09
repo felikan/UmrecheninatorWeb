@@ -12,6 +12,7 @@ interface Props {
   selectRef: any;
 }
 
+
 function NavMain(props: Props) {
 
   return (
@@ -24,13 +25,14 @@ function NavMain(props: Props) {
           options={props.inputValueUnitOptions}
           defaultValue={props.inputValueUnitOptions[1]}
           classNamePrefix="select"
-        />
+          id="dropdown"
+        /> 
         <button onClick={props.onErleuchtinierung} id="enter">
           Erleuchtiniere Mich!
         </button>
       </header>
-      <div>
-        <hr />
+      <div id="hr">
+        <hr/>
       </div>
     </>
   );
