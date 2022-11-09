@@ -36,12 +36,12 @@ function App() {
 
 
   useEffect(() => {
-    fetch("/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
-    console.log(backendData)
+    fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
   },[])
 
 
   const onErleuchtinierung = () => {
+    console.log(backendData)
     if (inputValueRef.current === null) return;
     if(inputValueRef.current.value.length === 0) return
     setInputValue(parseFloat(inputValueRef.current.value));
@@ -100,6 +100,7 @@ function App() {
         inputValueUnitOptions={inputValueUnitOptions}
       />
       <FooterMain newInputUnitRef={newInputUnitRef} newInputSizeRef={newInputSizeRef} onHinzufüginierung={onHinzufüginierung} onLöschinieren={onLöschinieren}/>
+
     </>
   );
 }

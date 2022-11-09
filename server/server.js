@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser")
+var cors = require('cors')
 const mongoString = "mongodb+srv://Umrecheninator:AXD1UnkGacxcPC9T@umrecheninator.ftcsi2x.mongodb.net/umrecheninatorUnits";
 
 //database
@@ -18,9 +19,10 @@ database.once('connected', () => {
 
 //server
 const app = express();
-const PORT = 5000 || process.env.PORT
+const PORT = 1024 || process.env.PORT
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 //app.use('/api', routes);
 app.listen(PORT, () => {
     console.log(`Server at ${PORT}`);
