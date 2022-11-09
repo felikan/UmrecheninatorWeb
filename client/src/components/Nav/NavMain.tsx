@@ -1,8 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import "../../styles/Nav.css"
-
-
+import "../../styles/Nav.css";
 
 interface Props {
   onErleuchtinierung: () => void;
@@ -12,19 +10,16 @@ interface Props {
   selectRef: any;
 }
 
-
 function NavMain(props: Props) {
+  const customStyles = {
+    control: (base: any, state: any) => ({
+      ...base,
+      height: "34px",
+      minHeight: "34px",
+    }),
+  };
 
-    const customStyles = {
-        control: (base, state) => ({
-            ...base,
-            height: '34px',
-            'min-height': '34px',
-        })
-    };
-
-
-    return (
+  return (
     <>
       <header className="is-flex">
         <input ref={props.inputValueRef} type="number" id="value" />
@@ -36,13 +31,13 @@ function NavMain(props: Props) {
           classNamePrefix="select"
           id="dropdown"
           styles={customStyles}
-        /> 
+        />
         <button onClick={props.onErleuchtinierung} id="enter">
           Erleuchtiniere Mich!
         </button>
       </header>
       <div id="hr">
-        <hr/>
+        <hr />
       </div>
     </>
   );

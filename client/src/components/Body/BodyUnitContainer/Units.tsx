@@ -9,7 +9,6 @@ interface Props {
 }
 
 function Units(props: Props) {
-  console.log(props.inputValue)
   return (
     <>
       {props.allUntis.map((e, i) => (
