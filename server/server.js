@@ -47,7 +47,7 @@ app.get("/api/getAll", async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
-app.post("/test", async (req, res) => {
+app.post("/api/insert", async (req, res) => {
         const unit = new Model({
         unitName: req.body.unitName,
         unitSize: req.body.unitSize
