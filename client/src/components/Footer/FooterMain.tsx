@@ -16,6 +16,10 @@ function FooterMain(props: Props) {
             <input ref={props.newInputUnitRef} type="text" placeholder="Einheit" id="nameIn"/>
             <input ref={props.newInputSizeRef} type="number" placeholder="Größe in Meter" id="sizeIn"/>
             <button onClick={props.onLöschinieren} id="Del">Löschinieren</button>
+            <img style={{float: 'right', width: "150px", marginRight: "1rem"}} id="counter" src="https://counter8.optistats.ovh/private/freecounterstat.php?c=41w9u9uze1nbyuhpmjszfkwttargzlex"/>
+
+
+                  
         </footer>
     );
 }
