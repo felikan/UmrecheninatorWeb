@@ -3,6 +3,7 @@ import "../styles/App.css";
 import NavMain from "./Nav/NavMain";
 import BodyMain from "./Body/BodyMain";
 import FooterMain from "./Footer/FooterMain";
+import axios from "axios"
 
 function App() {
   const inputValueRef = useRef<HTMLInputElement>(null);
@@ -36,8 +37,18 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
+    // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
+
+    axios.get("http://localhost:1024/api/getAll").then(res => {setBackendData(res.data)})
   },[])
+
+
+  const submit = () => {
+    axios.post("http://localhost:1024/api/insert", {
+
+    })
+  }
+
 
 
   const onErleuchtinierung = () => {

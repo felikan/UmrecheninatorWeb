@@ -2,6 +2,8 @@ import React from "react";
 import Select from "react-select";
 import "../../styles/Nav.css"
 
+
+
 interface Props {
   onErleuchtinierung: () => void;
   inputValueRef: React.Ref<HTMLInputElement>;
@@ -11,6 +13,7 @@ interface Props {
 }
 
 function NavMain(props: Props) {
+
   return (
     <>
       <header className="is-flex">
