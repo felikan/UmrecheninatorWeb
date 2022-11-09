@@ -5,6 +5,14 @@ html{
     max-height: 100%;
 }
 
+header {
+    align-items: center;
+    min-width: 100%;
+    min-height: 3.5rem;
+}
+#hr {
+    margin-top: -1rem;
+  }
 body{
     font-size: large;
     font-weight: bold;
@@ -14,14 +22,35 @@ body{
     display: flex;
     flex-direction: column;
 }
+
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem;
+    height: 2.5rem
+}
+#value {
+    margin-left: 0.5rem;
+}
+#dropdown {
+    margin-left: 0.5rem;
+}
+#enter {
+    margin-left: 0.5rem;
 }
 
-
+#Test {
+    margin-left: 0.5rem;
+}
+#nameIn {
+    margin-left: 0.5rem;
+}
+#sizeIn {
+    margin-left: 0.5rem;
+}
+#Del {
+    margin-left: 0.5rem;
+}
 #container {
     display: flex;
     flex-direction: row;
@@ -29,12 +58,12 @@ footer {
 }
 #output{
     font-size: 22px;
+    border-collapse: separate;
     border-spacing: 1.5vh;
     overflow-y: auto;
     display: block;
     height: 100%;
     max-width: 70%;
-
 }
 #doof {
     width: 50vw;
