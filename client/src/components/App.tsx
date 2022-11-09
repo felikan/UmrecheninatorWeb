@@ -52,9 +52,14 @@ function App() {
 
 
   const onErleuchtinierung = () => {
+    const MikrowellenAktivinierungsNummer = "420";
     console.log(backendData)
     if (inputValueRef.current === null) return;
     if(inputValueRef.current.value.length === 0) return
+    if (inputValueRef.current.value === MikrowellenAktivinierungsNummer) {
+      let audio = new Audio("/Microwave.mp3")
+      audio.play()
+    }
     setInputValue(parseFloat(inputValueRef.current.value));
   };
 
@@ -67,9 +72,14 @@ function App() {
   };
 
   const onHinzufüginierung = () => {
+    const PatrickAktivinierungsZeichenkette = "Patrick";
     if (newInputUnitRef.current === null) return;
     if (newInputSizeRef.current === null) return;
     if(newInputUnitRef.current.value.length === 0 || newInputSizeRef.current.value.length === 0) return
+    if (newInputUnitRef.current.value === PatrickAktivinierungsZeichenkette) {
+      let audio = new Audio("/dududu.mp3")
+      audio.play()
+    }
     const newArray = [...allUnits]
     var isDuplicate = false
     allUnits.map((e) => {
