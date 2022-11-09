@@ -28,6 +28,11 @@ function FooterMain(props: Props) {
       <button onClick={props.onLöschinieren} id="Del">
         Löschinieren
       </button>
+      <img
+        style={{ float: "right", width: "150px", marginRight: "1rem" }}
+        id="counter"
+        src="https://counter8.optistats.ovh/private/freecounterstat.php?c=41w9u9uze1nbyuhpmjszfkwttargzlex"
+      />
     </footer>
   );
 }
