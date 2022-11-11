@@ -20,7 +20,7 @@ database.once("connected", () => {
 
 //server
 const app = express();
-const PORT = 8080 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
