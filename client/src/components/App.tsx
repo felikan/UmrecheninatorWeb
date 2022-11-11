@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
 
-    axios.get("http://localhost:1024/api/getAll").then((res) => {
+    axios.get("http://localhost:8080/api/getAll").then((res) => {
       setBackendData(res.data);
     });
     console.log("hey");
@@ -48,7 +48,7 @@ function App() {
 
   const onSubmitNewInput = () => {
     axios
-      .post("http://localhost:1024/api/insert", {
+      .post("http://localhost:8080/api/insert", {
         newInputUnitRef: newInputUnitRef,
         newInputSizeRef: newInputSizeRef,
       })
