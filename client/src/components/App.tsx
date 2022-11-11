@@ -103,16 +103,16 @@ function App() {
 
     allUnits.map((e) => {
       if (
-        e.unitName === newInputUnitRef.current.value &&
-        e.unitSize === parseFloat(newInputSizeRef.current.value)
+        e.unitName === newInputUnitRef.current!.value &&
+        e.unitSize === parseFloat(newInputSizeRef.current!.value)
       )
         return;
     });
     newArray.map((e, i) => {
-      if (e.unitName === newInputUnitRef.current.value) {
+      if (e.unitName === newInputUnitRef.current!.value) {
         newArray[i] = {
-          unitName: newInputUnitRef.current.value,
-          unitSize: parseFloat(newInputSizeRef.current.value),
+          unitName: newInputUnitRef.current!.value,
+          unitSize: parseFloat(newInputSizeRef.current!.value),
         };
         setAllUnits(newArray);
         isDuplicate = true;
@@ -122,8 +122,8 @@ function App() {
     setAllUnits((prevState) => [
       ...prevState,
       {
-        unitName: newInputUnitRef.current.value,
-        unitSize: parseFloat(newInputSizeRef.current.value),
+        unitName: newInputUnitRef.current!.value,
+        unitSize: parseFloat(newInputSizeRef.current!.value),
       },
     ]);
     onSubmitNewInput();
