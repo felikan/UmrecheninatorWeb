@@ -20,7 +20,7 @@ database.once("connected", () => {
 
 //server
 const app = express();
-const PORT = 1024 || process.env.PORT;
+const PORT = 8080 || process.env.PORT;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -67,6 +67,29 @@ app.post("/api/insert", async (req, res) => {
   try {
     const unitToAdd = await unit.save();
     res.status(200).json(unitToAdd);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.delete("/api/del", async (req, res) => {
+  const unit = new Model({
+    unitName: req.body.unitName,
+    unitSize: req.body.unitSize,
+  });
+
+  const units = await Model.find();
+
+  const unitsFormat = [];
+
+  units.map((unit) => {
+    unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
+  });
+
+  console.log(units);
+
+  try {
+    await unit.deleteOne(unitsFormat[unitsFormat.length - 1]);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
