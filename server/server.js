@@ -30,7 +30,7 @@ app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/website/index.html");
+  res.sendFile(__dirname + "/index.html");
 });
 app.get("/api/getAll", async (req, res) => {
   try {
