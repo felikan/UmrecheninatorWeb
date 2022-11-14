@@ -1,26 +1,27 @@
-var fs = require("fs")
 
-function Initialize() {
-    const path = "./units.json"
-    const tbodyRef = document.getElementById('output').getElementsByTagName('tbody')[0];
-    fs.readFile(path, "utf-8", function (err, data){
-        console.log("Hallo", data)
-        const units = JSON.parse(data);
-        units.map((unit, i) => {
-            const newRow = tbodyRef.insertRow()
-            const newCell = newRow.insertCell()
-            const newText = document.createTextNode(unit.name + ": ")
-            newCell.appendChild(newText)
-            const row = tbodyRef.rows[i]
-            const valCell = row.insertCell()
-            const valText = document.createTextNode("0")
-            valCell.appendChild(valText)
-            valCell.setAttribute("id", `unit${i}`)
-            row.setAttribute("class", "OutputRow")
-        }
-    );
-    
-})}
+
+async function Initialize() {    
+    fetch("http://localhost:3000/api/getAll").then((res => res.json()))
+        .then(data => {
+            const tbodyRef = document.getElementById('output').getElementsByTagName('tbody')[0]
+            console.log(data)
+            const units = data;
+            console.log(Array.isArray(units))
+            units.map((unit, i) => {
+                console.log(unit)
+                const newRow = tbodyRef.insertRow()
+                const newCell = newRow.insertCell()
+                const newText = document.createTextNode(unit.unitName + ": ")
+                newCell.appendChild(newText)
+                const row = tbodyRef.rows[i]
+                const valCell = row.insertCell()
+                const valText = document.createTextNode("0")
+                valCell.appendChild(valText)
+                valCell.setAttribute("id", `unit${i}`)
+                row.setAttribute("class", "OutputRow")
+                });    
+            })
+    }
 function Calc() {
     const path = "./units.json"
     fs.readFile(path, "utf-8", function (err, data) {

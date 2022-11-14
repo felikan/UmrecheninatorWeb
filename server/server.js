@@ -21,7 +21,7 @@ database.once("connected", () => {
 //server
 const app = express();
 const PORT = 3000 || process.env.PORT;
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -41,7 +41,7 @@ app.get("/api/getAll", async (req, res) => {
     units.map((unit) => {
       unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
     });
-
+  
     res.json(unitsFormat);
   } catch (error) {
     res.status(500).json({ message: error.message });
