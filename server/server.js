@@ -21,7 +21,7 @@ database.once("connected", () => {
 //server
 const app = express();
 const PORT = 3000 || process.env.PORT;
-app.use(express.static(__dirname + '/website'));
+app.use(express.static(__dirname + '/'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
