@@ -14,7 +14,7 @@ async function Initialize() {
 
                 const newRow = tbodyRef.insertRow()
                 const newCell = newRow.insertCell()
-                const newText = document.createTextNode(unit.unitName + ": ")
+                const newText = document.createTextNode("in "+unit.unitName + ": ")
                 newCell.appendChild(newText)
                 const row = tbodyRef.rows[i]
                 const valCell = row.insertCell()
@@ -31,9 +31,8 @@ function Calc() {
     if (document.getElementById("value").value == MikrowellenAktiervierungsIdentifiktitierungsNummer) {
         document.getElementById("audio").play()
     }
-    
+    console.log(units, "hier")
     units.map((unit,i) => {
-        console.log(unit)
         const value = () => {
             switch (document.getElementById('unit').value) {
                 case 'cm':
@@ -44,45 +43,66 @@ function Calc() {
                   return (document.getElementById('value').value * 1000) / unit.unitSize;
             }
         };
-        
+    
+        console.log( document.getElementById(`${i}`) )
         document.getElementById(`${i}`).innerHTML = value().toFixed(10)
     })
 }
 
 function AddUnit() {
+    if(!newUnitName.value.length ||!newUnitSize.value.length) return
+    var isExisting = false
+    units.map((unit,i) => {
+        if(unit.unitName === newUnitName.value){
+            console.log(unit.unitName, newUnitName.value)
+            units.unitSize = parseFloat(newUnitSize.value)
+            isExisting = true
+        }
+    
+        })
 
-    if(!newUnitName.value.lengt ||!newUnitSize.value.length) return
-    console.log(typeof newUnitName.value)
-    units.push({unitName: newUnitName, unitSize: newUnitSize})
-    console.log(newUnitName.value, newUnitSize.value)
+        if(!isExisting){
+            units.push({unitName: newUnitName.value, unitSize: parseFloat(newUnitSize.value)})
+            console.log("hi")
             const newRow = tbodyRef.insertRow()
             const newCell = newRow.insertCell()
-            const newText = document.createTextNode(newUnitName.value + ": ")
+            const newText = document.createTextNode("in " + newUnitName.value + ": ")
             newCell.appendChild(newText)
             const row = tbodyRef.rows[units.length -1]
             const valCell = row.insertCell()
             const valText = document.createTextNode("0")
             valCell.appendChild(valText)
-            valCell.setAttribute("id", `unit${units.length -1}`)
+            valCell.setAttribute("id", `${units.length -1}`)
             row.setAttribute("class", "OutputRow")
+            
+        }
+
         
-            // fetch('http://localhost:1020/api/insert', {
-            //     method: 'POST',
-            //     headers: {
-            //       'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(units),
-            //   })
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //       console.log('Success:', data);
-            //     })
-            //     .catch((error) => {
-            //       console.error('Error:', error);
-            //     });
-}
+        console.log("client-units", units)
+        fetch('http://localhost:1020/api/insert', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({unitName: "1212", unitSize: 100}),
+            mode: "no-cors"
+    
+          })
+            .then((res) => res.json())
+            .then((units) => {
+              console.log('Success:', units);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+    }     
+
+    
 
 function Delete() {
+    units.pop()
+    console.log(units)
     if(tbodyRef.rows.length <= 9) return
     // fetch("http://localhost:1020/api/del").then((res => res.json()))
     tbodyRef.deleteRow(tbodyRef.rows.length -1)

@@ -53,7 +53,7 @@ app.post("/api/insert", async (req, res) => {
     unitName: req.body.unitName,
     unitSize: req.body.unitSize,
   });
-
+  console.log(req.body, req.body.unitSize)
   const units = await Model.find();
 
   const unitsFormat = [];
@@ -62,9 +62,8 @@ app.post("/api/insert", async (req, res) => {
     unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
   });
 
-  console.log(unitsFormat);
 
-  console.log(req.body.unitName, req.body.unitSize);
+
   try {
     const unitToAdd = await unit.save();
     res.status(200).json(unitToAdd);
@@ -87,7 +86,7 @@ app.delete("/api/del", async (req, res) => {
     unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
   });
 
-  console.log(units);
+
 
   try {
     await unit.deleteOne(unitsFormat[unitsFormat.length - 1]);
