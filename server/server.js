@@ -20,16 +20,17 @@ database.once("connected", () => {
 
 //server
 const app = express();
-const PORT = 3000 || process.env.PORT;
+const PORT = 8080 || process.env.PORT;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("build"));
 app.use(cors());
 //app.use('/api', routes);
 app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "(/../client/dist/index.html");
 });
 app.get("/api/getAll", async (req, res) => {
   try {
@@ -48,9 +49,10 @@ app.get("/api/getAll", async (req, res) => {
 });
 
 app.post("/api/insert", async (req, res) => {
+  console.log(req.body.newInputSizeRef);
   const unit = new Model({
-    unitName: req.body.unitName,
-    unitSize: req.body.unitSize,
+    unitName: req.body.newInputUnitRef,
+    unitSize: req.body.newInputSizeRef,
   });
 
   const units = await Model.find();
@@ -63,7 +65,6 @@ app.post("/api/insert", async (req, res) => {
 
   console.log(unitsFormat);
 
-  console.log(req.body.unitName, req.body.unitSize);
   try {
     const unitToAdd = await unit.save();
     res.status(200).json(unitToAdd);
