@@ -21,6 +21,7 @@ database.once("connected", () => {
 //server
 const app = express();
 const PORT = 3000 || process.env.PORT;
+app.use(express.static(__dirname + '/website'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -29,7 +30,7 @@ app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/website/index.html");
 });
 app.get("/api/getAll", async (req, res) => {
   try {
