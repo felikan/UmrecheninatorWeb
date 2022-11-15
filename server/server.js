@@ -34,7 +34,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
 app.get("/api/getAll", async (req, res) => {
-  console.log("gette");
   try {
     const units = await Model.find();
 
@@ -44,7 +43,7 @@ app.get("/api/getAll", async (req, res) => {
       unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
     });
 
-    res.json(unitsFormat);
+    res.json(units);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -76,23 +75,11 @@ app.post("/api/insert", async (req, res) => {
 });
 
 app.delete("/api/del", async (req, res) => {
-  const unit = new Model({
-    unitName: req.body.unitName,
-    unitSize: req.body.unitSize,
-  });
-
   const units = await Model.find();
 
-  const unitsFormat = [];
-
-  units.map((unit) => {
-    unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
-  });
-
-  console.log(units);
-
   try {
-    await unit.deleteOne(unitsFormat[unitsFormat.length - 1]);
+    const unitToDel = await Model.deleteOne(units[units.length - 1]);
+    res.status(200).json(unitToDel);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

@@ -9,8 +9,6 @@ interface Props {
 }
 
 function Units(props: Props) {
-  console.log("hallo");
-  console.log(props.allUnits);
   return (
     <>
       {props.allUnits.map((e, i) => (

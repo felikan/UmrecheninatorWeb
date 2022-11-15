@@ -28,20 +28,23 @@ function App() {
   useEffect(() => {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
 
-    axios.get("http://localhost:8080/api/getAll").then((res) => {
-      setAllUnits(res.data);
-    });
-    console.log("hey");
+    axios
+      .get("http://localhost:8080/api/getAll")
+      .then((res) => {
+        setAllUnits(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const onSubmitNewInput = () => {
-    const post = {
+    const newUnit = {
       newInputUnitRef: newInputUnitRef.current!.value,
       newInputSizeRef: newInputSizeRef.current!.value,
     };
-    axios.post("http://localhost:8080/api/insert", post).then(() => {
-      console.log("success insert");
-    });
+    axios
+      .post("http://localhost:8080/api/insert", newUnit)
+      .then()
+      .catch((err) => console.log(err));
   };
 
   const onErleuchtinierung = () => {
@@ -116,9 +119,14 @@ function App() {
   };
 
   const onLöschinieren = () => {
-    const defaultAllUnitsLength = 9;
+    const defaultAllUnitsLength = 8;
     if (allUnits.length === defaultAllUnitsLength) return;
     setAllUnits((prevState) => prevState.slice(0, -1));
+
+    axios
+      .delete("http://localhost:8080/api/del")
+      .then()
+      .catch((err) => console.log(err));
   };
   return (
     <>
