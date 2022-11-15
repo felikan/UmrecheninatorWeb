@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
 
-    axios.get("https://umrecheninator.de/api/getAll").then((res) => {
+    axios.get("http://localhost:8080/api/getAll").then((res) => {
       setAllUnits(res.data);
     });
     console.log("hey");

@@ -30,10 +30,11 @@ app.use(cors());
 app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
 app.get("/api/getAll", async (req, res) => {
+  console.log("gette");
   try {
     const units = await Model.find();
 
