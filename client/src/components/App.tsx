@@ -36,6 +36,10 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  function isNumber(n: any) {
+    return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+  }
+
   const onSubmitNewInput = () => {
     const newUnit = {
       newInputUnitRef: newInputUnitRef.current!.value,
@@ -53,6 +57,7 @@ function App() {
     if (inputValueRef.current.value.length === 0) return;
     if (inputValueRef.current.value === MikrowellenAktivinierungsNummer) {
       let audio = new Audio("/Microwave.mp3");
+
       audio.play();
     }
 
@@ -69,6 +74,7 @@ function App() {
 
   const onHinzufüginierung = () => {
     const PatrickAktivinierungsZeichenkette = "Patrick";
+    if (!isNumber(newInputSizeRef.current!.value)) return;
     if (newInputUnitRef.current === null) return;
     if (newInputSizeRef.current === null) return;
 
@@ -78,14 +84,9 @@ function App() {
     )
       return;
 
-    if (
-      newInputUnitRef.current.value.length === 0 ||
-      newInputSizeRef.current.value.length === 0
-    )
-      return;
     if (newInputUnitRef.current.value === PatrickAktivinierungsZeichenkette) {
       let audio = new Audio("/dududu.mp3");
-      audio.play();
+      if (!audio.paused) audio.play();
     }
     const newArray = [...allUnits];
     var isDuplicate = false;
@@ -105,6 +106,7 @@ function App() {
         };
         setAllUnits(newArray);
         isDuplicate = true;
+        onSubmitNewInput();
       }
     });
     if (isDuplicate) return;

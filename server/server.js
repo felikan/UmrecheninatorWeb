@@ -19,6 +19,10 @@ database.once("connected", () => {
   console.log("Database Connected");
 });
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+}
+
 //server
 const app = express();
 const PORT = 8080 || process.env.PORT;
@@ -50,24 +54,15 @@ app.get("/api/getAll", async (req, res) => {
 });
 
 app.post("/api/insert", async (req, res) => {
-  console.log(req.body.newInputSizeRef);
-  const unit = new Model({
+  if (!isNumber(req.body.newInputSizeRef)) return;
+
+  const newUnit = new Model({
     unitName: req.body.newInputUnitRef,
     unitSize: req.body.newInputSizeRef,
   });
 
-  const units = await Model.find();
-
-  const unitsFormat = [];
-
-  units.map((unit) => {
-    unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
-  });
-
-  console.log(unitsFormat);
-
   try {
-    const unitToAdd = await unit.save();
+    const unitToAdd = await newUnit.save();
     res.status(200).json(unitToAdd);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -77,9 +72,12 @@ app.post("/api/insert", async (req, res) => {
 app.delete("/api/del", async (req, res) => {
   const units = await Model.find();
 
+  console.log(req.body);
   try {
-    const unitToDel = await Model.deleteOne(units[units.length - 1]);
-    res.status(200).json(unitToDel);
+    if (units.length > 8) {
+      const unitToDel = await Model.deleteOne(units[units.length - 1]);
+      res.status(200).json(unitToDel);
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
