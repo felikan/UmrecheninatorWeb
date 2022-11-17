@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  allUntis: { unitName: string; unitSize: number }[];
+  allUnits: { unitName: string; unitSize: number }[];
   inputValue: number;
   inputValueUnitOptions: { value: number; label: string }[];
 
@@ -11,7 +11,7 @@ interface Props {
 function Units(props: Props) {
   return (
     <>
-      {props.allUntis.map((e, i) => (
+      {props.allUnits.map((e, i) => (
         <tbody key={i}>
           <tr>
             <td>{"in " + e.unitName}</td>

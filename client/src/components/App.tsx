@@ -12,23 +12,12 @@ function App() {
   const selectRef = useRef<any>(null);
   const [allUnits, setAllUnits] = useState<
     { unitName: string; unitSize: number }[]
-  >([
-    { unitName: "Ford Mondeos", unitSize: 4.456 },
-    { unitName: "Club Mate Flaschen", unitSize: 0.24 },
-    { unitName: "Samsung GU50AU7199UXZG LED-Fernseher", unitSize: 1.1168 },
-    { unitName: "Längen der Titanic", unitSize: 269 },
-    { unitName: "Längen des Nil", unitSize: 6693000 },
-    { unitName: "Erdumfängen am Äquator", unitSize: 40075017 },
-    { unitName: "20cm Linealen", unitSize: 0.2 },
-    { unitName: "Sternburg Flaschen", unitSize: 0.27 },
-    { unitName: "Elon Musks", unitSize: 1.88 },
-  ]);
+  >([]);
+  const [allUnitsID, setAllUnitsID] = useState<  {id: string; unitName: string; unitSize: number }[]>([])
 
   const [inputValue, setInputValue] = useState<number>(0);
   const [optionActive, setOptionActive] = useState<number>(1);
-  const [backendData, setBackendData] = useState<
-    { unitName: string; unitSize: number }[]
-  >([]);
+
   const [inputValueUnitOptions, setInputValueUnitOptions] = useState<
     { value: number; label: string }[]
   >([
@@ -40,31 +29,39 @@ function App() {
   useEffect(() => {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
 
-    axios.get("http://localhost:8080/api/getAll").then((res) => {
-      setBackendData(res.data);
-    });
-    console.log("hey");
+    axios
+      .get("http://localhost:8080/api/getAll")
+      .then((res) => {
+        setAllUnits(res.data);
+        setAllUnitsID(res.data)
+
+      })
+      .catch((err) => console.log(err));
   }, []);
 
+  function isNumber(n: any) {
+    return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+  }
+
   const onSubmitNewInput = () => {
+    const newUnit = {
+      newInputUnitRef: newInputUnitRef.current!.value,
+      newInputSizeRef: newInputSizeRef.current!.value,
+    };
     axios
-      .post("http://localhost:8080/api/insert", {
-        newInputUnitRef: newInputUnitRef,
-        newInputSizeRef: newInputSizeRef,
-      })
-      .then(() => {
-        console.log("success insert");
-      });
+      .post("http://localhost:8080/api/insert", newUnit)
+      .then()
+      .catch((err) => console.log(err));
   };
 
   const onErleuchtinierung = () => {
     const MikrowellenAktivinierungsNummer = "420";
-    console.log(backendData);
     if (inputValueRef.current === null) return;
     if (inputValueRef.current.value.length === 0) return;
     if (inputValueRef.current.value === MikrowellenAktivinierungsNummer) {
       let audio = new Audio("/Microwave.mp3");
-      audio.play();
+       audio.play();
+
     }
 
     setInputValue(parseFloat(inputValueRef.current.value));
@@ -80,6 +77,7 @@ function App() {
 
   const onHinzufüginierung = () => {
     const PatrickAktivinierungsZeichenkette = "Patrick";
+    if (!isNumber(newInputSizeRef.current!.value)) return;
     if (newInputUnitRef.current === null) return;
     if (newInputSizeRef.current === null) return;
 
@@ -89,14 +87,10 @@ function App() {
     )
       return;
 
-    if (
-      newInputUnitRef.current.value.length === 0 ||
-      newInputSizeRef.current.value.length === 0
-    )
-      return;
     if (newInputUnitRef.current.value === PatrickAktivinierungsZeichenkette) {
       let audio = new Audio("/dududu.mp3");
-      audio.play();
+      if(audio.duration > 0 && !audio.paused)       audio.play();
+
     }
     const newArray = [...allUnits];
     var isDuplicate = false;
@@ -116,6 +110,7 @@ function App() {
         };
         setAllUnits(newArray);
         isDuplicate = true;
+        onSubmitNewInput();
       }
     });
     if (isDuplicate) return;
@@ -130,9 +125,14 @@ function App() {
   };
 
   const onLöschinieren = () => {
-    const defaultAllUnitsLength = 9;
+    const defaultAllUnitsLength = 8;
     if (allUnits.length === defaultAllUnitsLength) return;
     setAllUnits((prevState) => prevState.slice(0, -1));
+
+    axios
+      .delete(`http://localhost:8080/api/del/${allUnits[allUnits.length -1].unitName}`)
+      .then()
+      .catch((err) => console.log(err));
   };
   return (
     <>

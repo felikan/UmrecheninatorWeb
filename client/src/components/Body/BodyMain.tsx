@@ -15,7 +15,7 @@ function BodyMain(props: Props) {
     <div id="container">
       <table id="output">
         <Units
-          allUntis={props.allUnits}
+          allUnits={props.allUnits}
           optionActive={props.optionActive}
           inputValue={props.inputValue}
           inputValueUnitOptions={props.inputValueUnitOptions}
