@@ -69,3 +69,35 @@ footer {
     width: 50vw;
 
 }
+
+@media only screen and (max-width: 1000px) {
+body {
+    flex-direction: row;
+    position: absolute;
+    z-index: 0;
+}
+footer {
+    display: flex;
+    flex-direction: column;
+}
+#Test {
+    margin-right: 100px;
+    margin-top: 0.5rem;
+}
+#nameIn {
+    margin-right: 500px;
+    margin-top: 0.5rem;
+}
+#sizeIn {
+    margin-right: 500px;
+    margin-top: 0.5rem;
+}
+#Del {
+    margin-right: 500px;
+    margin-top: 0.5rem;
+}
+#doof {
+    position: absolute;
+    z-index: -1;
+}
+}
