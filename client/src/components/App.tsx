@@ -13,7 +13,9 @@ function App() {
   const [allUnits, setAllUnits] = useState<
     { unitName: string; unitSize: number }[]
   >([]);
-  const [allUnitsID, setAllUnitsID] = useState<  {id: string; unitName: string; unitSize: number }[]>([])
+  const [allUnitsID, setAllUnitsID] = useState<
+    { id: string; unitName: string; unitSize: number }[]
+  >([]);
 
   const [inputValue, setInputValue] = useState<number>(0);
   const [optionActive, setOptionActive] = useState<number>(1);
@@ -33,8 +35,7 @@ function App() {
       .get("http://localhost:8080/api/getAll")
       .then((res) => {
         setAllUnits(res.data);
-        setAllUnitsID(res.data)
-
+        setAllUnitsID(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -60,8 +61,7 @@ function App() {
     if (inputValueRef.current.value.length === 0) return;
     if (inputValueRef.current.value === MikrowellenAktivinierungsNummer) {
       let audio = new Audio("/Microwave.mp3");
-       audio.play();
-
+      audio.play();
     }
 
     setInputValue(parseFloat(inputValueRef.current.value));
@@ -89,8 +89,7 @@ function App() {
 
     if (newInputUnitRef.current.value === PatrickAktivinierungsZeichenkette) {
       let audio = new Audio("/dududu.mp3");
-      if(audio.duration > 0 && !audio.paused)       audio.play();
-
+      audio.play();
     }
     const newArray = [...allUnits];
     var isDuplicate = false;
@@ -130,7 +129,11 @@ function App() {
     setAllUnits((prevState) => prevState.slice(0, -1));
 
     axios
-      .delete(`http://localhost:8080/api/del/${allUnits[allUnits.length -1].unitName}`)
+      .delete(
+        `http://localhost:8080/api/del/${
+          allUnits[allUnits.length - 1].unitName
+        }`
+      )
       .then()
       .catch((err) => console.log(err));
   };

@@ -72,19 +72,15 @@ app.post("/api/insert", async (req, res) => {
 app.delete("/api/del/:id", async (req, res) => {
   const units = await Model.find();
 
-  const val = await Model.findOne({unitName: req.params.id}).exec()
-  if(val === null) return
-  console.log(val.unitName, units[units.length - 1])
-  console.log(val.unitName === units[units.length - 1].unitName)
+  const val = await Model.findOne({ unitName: req.params.id }).exec();
+  if (val === null || !(val.unitName === units[units.length - 1].unitName))
+    return;
 
   console.log(req.params.id);
   try {
     if (units.length > 8) {
-     
-        const unitToDel = await Model.deleteOne(units[units.length - 1]);
-        res.status(200).json(unitToDel);
-   
-  
+      const unitToDel = await Model.deleteOne(units[units.length - 1]);
+      res.status(200).json(unitToDel);
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
