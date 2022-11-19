@@ -11,7 +11,7 @@ function App() {
   const newInputSizeRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<any>(null);
   const [allUnits, setAllUnits] = useState<
-    { unitName: string; unitSize: number }[]
+    { _id: string; unitName: string; unitSize: number }[]
   >([]);
   const [allUnitsID, setAllUnitsID] = useState<
     { id: string; unitName: string; unitSize: number }[]
@@ -51,7 +51,11 @@ function App() {
     };
     axios
       .post("http://localhost:8080/api/insert", newUnit)
-      .then()
+      .then((res) => {
+        console.log(res.data);
+        setAllUnits((prevState) => prevState.slice(0, -1));
+        setAllUnits((prevState) => [...prevState, res.data]);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -104,6 +108,7 @@ function App() {
     newArray.map((e, i) => {
       if (e.unitName === newInputUnitRef.current!.value) {
         newArray[i] = {
+          _id: "",
           unitName: newInputUnitRef.current!.value,
           unitSize: parseFloat(newInputSizeRef.current!.value),
         };
@@ -116,6 +121,7 @@ function App() {
     setAllUnits((prevState) => [
       ...prevState,
       {
+        _id: "",
         unitName: newInputUnitRef.current!.value,
         unitSize: parseFloat(newInputSizeRef.current!.value),
       },
@@ -128,11 +134,10 @@ function App() {
     if (allUnits.length === defaultAllUnitsLength) return;
     setAllUnits((prevState) => prevState.slice(0, -1));
 
+    console.log(allUnits[allUnits.length - 1]._id);
     axios
       .delete(
-        `http://localhost:8080/api/del/${
-          allUnits[allUnits.length - 1].unitName
-        }`
+        `http://localhost:8080/api/del/${allUnits[allUnits.length - 1]._id}`
       )
       .then()
       .catch((err) => console.log(err));

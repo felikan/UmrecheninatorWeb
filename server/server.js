@@ -72,9 +72,9 @@ app.post("/api/insert", async (req, res) => {
 app.delete("/api/del/:id", async (req, res) => {
   const units = await Model.find();
 
-  const val = await Model.findOne({ unitName: req.params.id }).exec();
-  if (val === null || !(val.unitName === units[units.length - 1].unitName))
-    return;
+  const val = await Model.findById(req.params.id).exec();
+
+  if (val === null || !units[units.length - 1]._id.equals(val._id)) return;
 
   console.log(req.params.id);
   try {
