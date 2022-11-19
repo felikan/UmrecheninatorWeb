@@ -52,7 +52,6 @@ function App() {
     axios
       .post("http://localhost:8080/api/insert", newUnit)
       .then((res) => {
-        console.log(res.data);
         setAllUnits((prevState) => prevState.slice(0, -1));
         setAllUnits((prevState) => [...prevState, res.data]);
       })
@@ -134,7 +133,6 @@ function App() {
     if (allUnits.length === defaultAllUnitsLength) return;
     setAllUnits((prevState) => prevState.slice(0, -1));
 
-    console.log(allUnits[allUnits.length - 1]._id);
     axios
       .delete(
         `http://localhost:8080/api/del/${allUnits[allUnits.length - 1]._id}`

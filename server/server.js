@@ -55,15 +55,32 @@ app.get("/api/getAll", async (req, res) => {
 
 app.post("/api/insert", async (req, res) => {
   if (!isNumber(req.body.newInputSizeRef)) return;
-
   const newUnit = new Model({
     unitName: req.body.newInputUnitRef,
     unitSize: req.body.newInputSizeRef,
   });
 
+  const foundUnit = await Model.findOne({
+    unitName: req.body.newInputUnitRef,
+    unitSize: req.body.newInputSizeRef,
+  }).exec();
+  if (foundUnit) return;
+  const foundUnitName = await Model.findOne({
+    unitName: req.body.newInputUnitRef,
+  }).exec();
+
   try {
-    const unitToAdd = await newUnit.save();
-    res.status(200).json(unitToAdd);
+    if (foundUnitName) {
+      const unitToUpdate = await Model.findOneAndUpdate(
+        { unitName: req.body.newInputUnitRef },
+        { unitSize: req.body.newInputSizeRef },
+        { new: true }
+      );
+      res.status(200).json(unitToUpdate);
+    } else {
+      const unitToAdd = await newUnit.save();
+      res.status(200).json(unitToAdd);
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -76,7 +93,6 @@ app.delete("/api/del/:id", async (req, res) => {
 
   if (val === null || !units[units.length - 1]._id.equals(val._id)) return;
 
-  console.log(req.params.id);
   try {
     if (units.length > 8) {
       const unitToDel = await Model.deleteOne(units[units.length - 1]);
