@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   allUnits: { unitName: string; unitSize: number }[];
   inputValue: number;

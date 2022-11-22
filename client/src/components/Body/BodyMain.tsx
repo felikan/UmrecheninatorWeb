@@ -1,4 +1,3 @@
-import React from "react";
 import Doofi from "../../assets/img/Doofi.png";
 import Units from "./BodyUnitContainer/Units";
 

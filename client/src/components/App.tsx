@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "../styles/App.css";
 import NavMain from "./Nav/NavMain";
 import BodyMain from "./Body/BodyMain";
 import FooterMain from "./Footer/FooterMain";
@@ -33,11 +32,11 @@ function App() {
 
     axios
       .get("http://localhost:8080/api/getAll")
-      .then((res) => {
+      .then(res => {
         setAllUnits(res.data);
         setAllUnitsID(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   function isNumber(n: any) {
@@ -51,11 +50,11 @@ function App() {
     };
     axios
       .post("http://localhost:8080/api/insert", newUnit)
-      .then((res) => {
-        setAllUnits((prevState) => prevState.slice(0, -1));
-        setAllUnits((prevState) => [...prevState, res.data]);
+      .then(res => {
+        setAllUnits(prevState => prevState.slice(0, -1));
+        setAllUnits(prevState => [...prevState, res.data]);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   const onErleuchtinierung = () => {
@@ -81,8 +80,8 @@ function App() {
   const onHinzufüginierung = () => {
     const PatrickAktivinierungsZeichenkette = "Patrick";
     if (!isNumber(newInputSizeRef.current!.value)) return;
-    if (newInputUnitRef.current === null) return;
-    if (newInputSizeRef.current === null) return;
+    if (!newInputUnitRef.current) return;
+    if (!newInputSizeRef.current) return;
 
     if (
       newInputUnitRef.current.value.length === 0 ||
@@ -97,7 +96,7 @@ function App() {
     const newArray = [...allUnits];
     var isDuplicate = false;
 
-    allUnits.map((e) => {
+    allUnits.map(e => {
       if (
         e.unitName === newInputUnitRef.current!.value &&
         e.unitSize === parseFloat(newInputSizeRef.current!.value)
@@ -117,7 +116,7 @@ function App() {
       }
     });
     if (isDuplicate) return;
-    setAllUnits((prevState) => [
+    setAllUnits(prevState => [
       ...prevState,
       {
         _id: "",
@@ -131,14 +130,14 @@ function App() {
   const onLöschinieren = () => {
     const defaultAllUnitsLength = 8;
     if (allUnits.length === defaultAllUnitsLength) return;
-    setAllUnits((prevState) => prevState.slice(0, -1));
+    setAllUnits(prevState => prevState.slice(0, -1));
 
     axios
       .delete(
         `http://localhost:8080/api/del/${allUnits[allUnits.length - 1]._id}`
       )
       .then()
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
   return (
     <>

@@ -1,6 +1,5 @@
 import React from "react";
 import Select from "react-select";
-import "../../styles/Nav.css";
 
 interface Props {
   onErleuchtinierung: () => void;
@@ -12,7 +11,7 @@ interface Props {
 
 function NavMain(props: Props) {
   const customStyles = {
-    control: (base: any, state: any) => ({
+    control: (base: any, _: any) => ({
       ...base,
       height: "34px",
       minHeight: "34px",
