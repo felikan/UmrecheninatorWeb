@@ -4,6 +4,7 @@ import NavMain from "./Nav/NavMain";
 import BodyMain from "./Body/BodyMain";
 import FooterMain from "./Footer/FooterMain";
 import axios from "axios";
+import isNumber from "../helpers/isNumber";
 
 function App() {
   const inputValueRef = useRef<HTMLInputElement>(null);
@@ -40,9 +41,7 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  function isNumber(n: any) {
-    return !isNaN(parseFloat(n)) && !isNaN(n - 0);
-  }
+
 
   const onSubmitNewInput = () => {
     const newUnit = {
@@ -57,6 +56,8 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
+
 
   const onErleuchtinierung = () => {
     const MikrowellenAktivinierungsNummer = "420";
@@ -77,6 +78,7 @@ function App() {
       }
     });
   };
+
 
   const onHinzufüginierung = () => {
     const PatrickAktivinierungsZeichenkette = "Patrick";
@@ -114,6 +116,9 @@ function App() {
         setAllUnits(newArray);
         isDuplicate = true;
         onSubmitNewInput();
+
+
+
       }
     });
     if (isDuplicate) return;
@@ -126,6 +131,8 @@ function App() {
       },
     ]);
     onSubmitNewInput();
+
+
   };
 
   const onLöschinieren = () => {
