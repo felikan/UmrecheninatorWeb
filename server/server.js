@@ -1,3 +1,4 @@
+const isNumber = require("./helpers/isNumber")
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -19,9 +20,6 @@ database.once("connected", () => {
   console.log("Database Connected");
 });
 
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && !isNaN(n - 0);
-}
 
 //server
 const app = express();
