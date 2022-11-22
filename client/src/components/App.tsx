@@ -5,6 +5,7 @@ import BodyMain from "./Body/BodyMain";
 import FooterMain from "./Footer/FooterMain";
 import axios from "axios";
 import isNumber from "../helpers/isNumber";
+import AktivinierungsZeichenkettenUndTolleMusik from "../helpers/AktivinierungsZeichenkettenUndTolleMusik";
 
 function App() {
   const inputValueRef = useRef<HTMLInputElement>(null);
@@ -41,8 +42,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-
-
   const onSubmitNewInput = () => {
     const newUnit = {
       newInputUnitRef: newInputUnitRef.current!.value,
@@ -56,8 +55,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-
-
 
   const onErleuchtinierung = () => {
     const MikrowellenAktivinierungsNummer = "420";
@@ -79,9 +76,7 @@ function App() {
     });
   };
 
-
   const onHinzufüginierung = () => {
-    const PatrickAktivinierungsZeichenkette = "Patrick";
     if (!isNumber(newInputSizeRef.current!.value)) return;
     if (newInputUnitRef.current === null) return;
     if (newInputSizeRef.current === null) return;
@@ -92,10 +87,12 @@ function App() {
     )
       return;
 
-    if (newInputUnitRef.current.value === PatrickAktivinierungsZeichenkette) {
-      let audio = new Audio("/dududu.mp3");
-      audio.play();
-    }
+    AktivinierungsZeichenkettenUndTolleMusik().map((e) => {
+      if (newInputUnitRef.current!.value === e.name) {
+        let audio = new Audio(e.source);
+        audio.play();
+      }
+    });
     const newArray = [...allUnits];
     var isDuplicate = false;
 
@@ -116,9 +113,6 @@ function App() {
         setAllUnits(newArray);
         isDuplicate = true;
         onSubmitNewInput();
-
-
-
       }
     });
     if (isDuplicate) return;
@@ -131,8 +125,6 @@ function App() {
       },
     ]);
     onSubmitNewInput();
-
-
   };
 
   const onLöschinieren = () => {
