@@ -29,7 +29,7 @@ function mapInputs(props: Props): Input[] {
 
 function Content(props: Props) {
   return (
-    <div id="container">
+    <div id="content">
       <table id="output">
         <tbody>
           {mapInputs(props).map((x, i) => (

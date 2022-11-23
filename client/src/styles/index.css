@@ -51,7 +51,7 @@ footer {
 #Del {
     margin-left: 0.5rem;
 }
-#container {
+#content {
     display: flex;
     flex-direction: row;
     height: 80vh;
