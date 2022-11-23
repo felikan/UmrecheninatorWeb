@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import NavMain from "./Nav/NavMain";
-import BodyMain from "./Body/BodyMain";
+import Body from "./Body/Body";
 import FooterMain from "./Footer/FooterMain";
 import axios from "axios";
-import isNumber from "../helpers/isNumber";
 import AktivinierungsZeichenkettenUndTolleMusik from "../helpers/AktivinierungsZeichenkettenUndTolleMusik";
 
 function App() {
   const inputValueRef = useRef<HTMLInputElement>(null);
+  const inputValueValue: number | undefined = inputValueRef.current?.value ? parseFloat(inputValueRef.current?.value) : undefined;
+  
   const newInputUnitRef = useRef<HTMLInputElement>(null);
+  const newInputUnitValue: string = newInputUnitRef.current?.value ?? "";
+
   const newInputSizeRef = useRef<HTMLInputElement>(null);
+  const newInputSizeValue: number | undefined = newInputSizeRef.current?.value ? parseFloat(newInputSizeRef.current?.value) : undefined;
+  
   const selectRef = useRef<any>(null);
   const [allUnits, setAllUnits] = useState<
     { _id: string; unitName: string; unitSize: number }[]
@@ -43,8 +48,8 @@ function App() {
 
   const onSubmitNewInput = () => {
     const newUnit = {
-      newInputUnitRef: newInputUnitRef.current!.value,
-      newInputSizeRef: newInputSizeRef.current!.value,
+      newInputUnitRef: newInputUnitValue,
+      newInputSizeRef: newInputSizeValue,
     };
     axios
       .post("http://localhost:8080/api/insert", newUnit)
@@ -56,15 +61,14 @@ function App() {
   };
 
   const onErleuchtinierung = () => {
-    const MikrowellenAktivinierungsNummer = "420";
-    if (inputValueRef.current === null) return;
-    if (inputValueRef.current.value.length === 0) return;
-    if (inputValueRef.current.value === MikrowellenAktivinierungsNummer) {
+    const MikrowellenAktivinierungsNummer = 420;
+    if (!inputValueValue) return;
+    if (inputValueValue === MikrowellenAktivinierungsNummer) {
       let audio = new Audio("/Microwave.mp3");
       audio.play();
     }
 
-    setInputValue(parseFloat(inputValueRef.current.value));
+    setInputValue(inputValueValue);
   };
 
   const onSelectChange = (e: any) => {
@@ -76,7 +80,7 @@ function App() {
   };
 
   const onHinzufüginierung = () => {
-    if (!isNumber(newInputSizeRef.current!.value)) return;
+    if (!newInputSizeValue) return;
     if (!newInputUnitRef.current) return;
     if (!newInputSizeRef.current) return;
 
@@ -86,8 +90,8 @@ function App() {
     )
       return;
 
-    AktivinierungsZeichenkettenUndTolleMusik().map((e) => {
-      if (newInputUnitRef.current!.value === e.name) {
+    AktivinierungsZeichenkettenUndTolleMusik().map(e => {
+      if (newInputUnitValue === e.name) {
         let audio = new Audio(e.source);
         audio.play();
       }
@@ -97,17 +101,17 @@ function App() {
 
     allUnits.map(e => {
       if (
-        e.unitName === newInputUnitRef.current!.value &&
-        e.unitSize === parseFloat(newInputSizeRef.current!.value)
+        e.unitName === newInputUnitValue &&
+        e.unitSize === newInputSizeValue
       )
         return;
     });
     newArray.map((e, i) => {
-      if (e.unitName === newInputUnitRef.current!.value) {
+      if (e.unitName === newInputUnitValue) {
         newArray[i] = {
           _id: "",
-          unitName: newInputUnitRef.current!.value,
-          unitSize: parseFloat(newInputSizeRef.current!.value),
+          unitName: newInputUnitValue,
+          unitSize: newInputSizeValue
         };
         setAllUnits(newArray);
         isDuplicate = true;
@@ -119,8 +123,8 @@ function App() {
       ...prevState,
       {
         _id: "",
-        unitName: newInputUnitRef.current!.value,
-        unitSize: parseFloat(newInputSizeRef.current!.value),
+        unitName: newInputUnitValue,
+        unitSize: newInputSizeValue
       },
     ]);
     onSubmitNewInput();
@@ -147,7 +151,7 @@ function App() {
         inputValueUnitOptions={inputValueUnitOptions}
         selectRef={selectRef}
       />
-      <BodyMain
+      <Body
         allUnits={allUnits}
         optionActive={optionActive}
         inputValue={inputValue}
