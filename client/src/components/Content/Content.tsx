@@ -27,7 +27,7 @@ function mapInputs(props: Props): Input[] {
   return result;
 }
 
-function Body(props: Props) {
+function Content(props: Props) {
   return (
     <div id="container">
       <table id="output">
@@ -46,4 +46,4 @@ function Body(props: Props) {
   );
 }
 
-export default Body;
+export default Content;

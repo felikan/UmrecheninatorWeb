@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import NavMain from "./Nav/NavMain";
-import Body from "./Body/Body";
+import Content from "./Content/Content";
 import FooterMain from "./Footer/FooterMain";
 import axios from "axios";
 import AktivinierungsZeichenkettenUndTolleMusik from "../helpers/AktivinierungsZeichenkettenUndTolleMusik";
@@ -151,7 +151,7 @@ function App() {
         inputValueUnitOptions={inputValueUnitOptions}
         selectRef={selectRef}
       />
-      <Body
+      <Content
         allUnits={allUnits}
         optionActive={optionActive}
         inputValue={inputValue}
