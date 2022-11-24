@@ -9,7 +9,7 @@
   "semicolons": true,
   "overrides": [
     {
-      "files": ["*.html", "*.scss", "*.css", "*.less", "*.sass"],
+      "files": ["*.html", "*.scss", "*.css", "*.tsx", "*.js", "*.ts"],
       "options": { "tabWidth": 4 }
     }
   ]

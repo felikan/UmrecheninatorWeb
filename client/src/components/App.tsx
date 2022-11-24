@@ -1,189 +1,69 @@
-import { useEffect, useRef, useState } from "react";
-import NavMain from "./Nav/NavMain";
-import Content from "./Content/Content";
-import FooterMain from "./Footer/FooterMain";
-import AktivinierungsZeichenkettenUndTolleMusik from "../helpers/AktivinierungsZeichenkettenUndTolleMusik";
-import { deleteUnit, getAllUnits, saveUnit } from "../Controller";
+import { useEffect, useState } from 'react';
+import { deleteUnit, getAllUnits, saveUnit } from '../Controller';
+import Navbar from './Navbar/Navbar';
+import Content from './Content/Content';
+import Footer from './Footer/Footer';
+import audioeffects from '../assets/audioeffects.json';
 
-function mapInputs(units: Unit[], input: number, activeOption: number): ConversionResult[] {
-  let values = units.map(x => (input * activeOption) / x.size);
-  let unitNames = units.map(x => x.name);
-
-  let result: ConversionResult[] = [];
-
-  for(let i = 0; i < values.length; i++){
-      result.push({value: values[i],unit: unitNames[i]} as ConversionResult);
-  }
-
-  return result;
+function mapInputs(units: Unit[], input: InputValue): ConversionResult[] {
+    return units.map(({ size, name }) => ({ value: (input.value * input.size) / size, unit: name } as ConversionResult));
 }
 
 function App() {
-  const inputValueRef = useRef<HTMLInputElement>(null);
-  const inputValueValue: number | undefined = inputValueRef.current?.value ? parseFloat(inputValueRef.current?.value) : undefined;
-  
-  const newInputUnitRef = useRef<HTMLInputElement>(null);
-  const newInputUnitValue: string = newInputUnitRef.current?.value ?? "";
+    let [allUnits, setAllUnits] = useState<Unit[]>([]);
+    const [inputValue, setInputValue] = useState<InputValue>({ value: 0, size: 1 });
 
-  const newInputSizeRef = useRef<HTMLInputElement>(null);
-  const newInputSizeValue: number | undefined = newInputSizeRef.current?.value ? parseFloat(newInputSizeRef.current?.value) : undefined;
-  
-  const selectRef = useRef<any>(null);
-  const [allUnits, setAllUnits] = useState<
-    { _id: string; unitName: string; unitSize: number }[]
-  >([]);
-  const [allUnitsID, setAllUnitsID] = useState<
-    { id: string; unitName: string; unitSize: number }[]
-  >([]);
-
-  const [inputValue, setInputValue] = useState<number>(0);
-  const [optionActive, setOptionActive] = useState<number>(1);
-
-  const [inputValueUnitOptions, setInputValueUnitOptions] = useState<
-    { value: number; label: string }[]
-  >([
-    { value: 1000, label: "km" },
-    { value: 1, label: "m" },
-    { value: 0.01, label: "cm" },
-  ]);
-
-  useEffect(() => {
-    // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
-
-    axios
-      .get("http://localhost:8080/api/getAll")
-      .then(res => {
-        setAllUnits(res.data);
-        setAllUnitsID(res.data);
-      })
-      .catch(err => console.log(err));
-  }, []);
-
-  const onSubmitNewInput = () => {
-    const newUnit = {
-      newInputUnitRef: newInputUnitValue,
-      newInputSizeRef: newInputSizeValue,
-    };
-    axios
-      .post("http://localhost:8080/api/insert", newUnit)
-      .then(res => {
-        setAllUnits(prevState => prevState.slice(0, -1));
-        setAllUnits(prevState => [...prevState, res.data]);
-      })
-      .catch(err => console.log(err));
-  };
-
-  const onErleuchtinierung = () => {
-    const MikrowellenAktivinierungsNummer = 420;
-    if (!inputValueValue) return;
-    if (inputValueValue === MikrowellenAktivinierungsNummer) {
-      let audio = new Audio("/Microwave.mp3");
-      audio.play();
-    }
-
-    setInputValue(inputValueValue);
-  };
-
-  const onSelectChange = (e: any) => {
-    inputValueUnitOptions.map((element, i) => {
-      if (element.value === e.value) {
-        setOptionActive(inputValueUnitOptions[i].value);
-      }
-    });
-  };
-
-  const onHinzufüginierung = () => {
-    if (!newInputSizeValue) return;
-    if (!newInputUnitRef.current) return;
-    if (!newInputSizeRef.current) return;
-
-    if (
-      newInputUnitRef.current.value.length === 0 ||
-      newInputSizeRef.current.value.length === 0
-    )
-      return;
-
-    AktivinierungsZeichenkettenUndTolleMusik().map(e => {
-      if (newInputUnitValue === e.name) {
-        let audio = new Audio(e.source);
-        audio.play();
-      }
-    });
-    const newArray = [...allUnits];
-    var isDuplicate = false;
-
-    allUnits.map(e => {
-      if (
-        e.unitName === newInputUnitValue &&
-        e.unitSize === newInputSizeValue
-      )
-        return;
-    });
-    newArray.map((e, i) => {
-      if (e.unitName === newInputUnitValue) {
-        newArray[i] = {
-          _id: "",
-          unitName: newInputUnitValue,
-          unitSize: newInputSizeValue
+    useEffect(() => {
+        async () => {
+            setAllUnits(await getAllUnits());
         };
-        setAllUnits(newArray);
-        isDuplicate = true;
-        onSubmitNewInput();
-      }
     });
-    if (isDuplicate) return;
-    setAllUnits(prevState => [
-      ...prevState,
-      {
-        _id: "",
-        unitName: newInputUnitValue,
-        unitSize: newInputSizeValue
-      },
-    ]);
-    onSubmitNewInput();
-  };
 
-  const onLöschinieren = () => {
-    const defaultAllUnitsLength = 8;
-    if (allUnits.length === defaultAllUnitsLength) return;
-    setAllUnits(prevState => prevState.slice(0, -1));
+    const onErleuchtinierung = (input: InputValue) => {
+        if (input.value === 420) new Audio('/Microwave.mp3').play();
 
-    axios
-      .delete(
-        `http://localhost:8080/api/del/${allUnits[allUnits.length - 1]._id}`
-      )
-      .then()
-      .catch(err => console.log(err));
-  };
-  return (
-    <>
-      <NavMain
-        inputValueRef={inputValueRef}
-        onErleuchtinierung={onErleuchtinierung}
-        onSelectChange={onSelectChange}
-        inputValueUnitOptions={inputValueUnitOptions}
-        selectRef={selectRef}
-      />
-      <Content values={mapInputs(allUnits, inputValueValue ?? 0, optionActive)}/>
-      <FooterMain
-        newInputUnitRef={newInputUnitRef}
-        newInputSizeRef={newInputSizeRef}
-        onHinzufüginierung={onHinzufüginierung}
-        onLöschinieren={onLöschinieren}
-      />
-    </>
-  );
-}
+        setInputValue(input);
+    };
 
-export interface Unit {
-  id?: number,
-  size: number,
-  name: string
-}
+    const onHinzufüginierung = async (unit: Unit) => {
+        if (allUnits.includes(unit)) return;
 
-export interface ConversionResult {
-  value: number,
-  unit: string
+        await saveUnit(unit);
+        setAllUnits(await getAllUnits());
+
+        audioeffects.map((e) => {
+            if (unit.name === e.name) new Audio(e.source).play();
+        });
+    };
+
+    const onLöschinieren = async () => {
+        await deleteUnit(allUnits.length - 1);
+        setAllUnits(await getAllUnits());
+    };
+
+    return (
+        <>
+            <Navbar onErleuchtinierung={onErleuchtinierung} />
+            <Content values={mapInputs(allUnits, inputValue)} />
+            <Footer onHinzufüginierung={onHinzufüginierung} onLöschinieren={onLöschinieren} />
+        </>
+    );
 }
 
 export default App;
+
+export interface Unit {
+    id?: number;
+    size: number;
+    name: string;
+}
+
+export interface InputValue {
+    value: number;
+    size: number;
+}
+
+export interface ConversionResult {
+    value: number;
+    unit: string;
+}
