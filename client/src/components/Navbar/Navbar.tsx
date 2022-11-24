@@ -6,7 +6,7 @@ function getOptionsValueByKey(value: string): Options {
 }
 
 interface Props {
-  setInput: (input: InputValue) => MouseEventHandler<HTMLButtonElement>;
+  onErleuchtinierung: (input: InputValue) => MouseEventHandler<HTMLButtonElement>;
 }
 
 function Navbar(props: Props) {
@@ -44,7 +44,7 @@ function Navbar(props: Props) {
         </select>
         <button 
           onClick={
-            props.setInput({
+            props.onErleuchtinierung({
               value: parseFloat(inputValueRef.current!.value),
               size: selectValue
             })
