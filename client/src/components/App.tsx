@@ -2,8 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import NavMain from "./Nav/NavMain";
 import Content from "./Content/Content";
 import FooterMain from "./Footer/FooterMain";
-import axios from "axios";
 import AktivinierungsZeichenkettenUndTolleMusik from "../helpers/AktivinierungsZeichenkettenUndTolleMusik";
+import { deleteUnit, getAllUnits, saveUnit } from "../Controller";
+
+function mapInputs(units: Unit[], input: number, activeOption: number): ConversionResult[] {
+  let values = units.map(x => (input * activeOption) / x.size);
+  let unitNames = units.map(x => x.name);
+
+  let result: ConversionResult[] = [];
+
+  for(let i = 0; i < values.length; i++){
+      result.push({value: values[i],unit: unitNames[i]} as ConversionResult);
+  }
+
+  return result;
+}
 
 function App() {
   const inputValueRef = useRef<HTMLInputElement>(null);
@@ -151,12 +164,7 @@ function App() {
         inputValueUnitOptions={inputValueUnitOptions}
         selectRef={selectRef}
       />
-      <Content
-        allUnits={allUnits}
-        optionActive={optionActive}
-        inputValue={inputValue}
-        inputValueUnitOptions={inputValueUnitOptions}
-      />
+      <Content values={mapInputs(allUnits, inputValueValue ?? 0, optionActive)}/>
       <FooterMain
         newInputUnitRef={newInputUnitRef}
         newInputSizeRef={newInputSizeRef}
@@ -165,6 +173,17 @@ function App() {
       />
     </>
   );
+}
+
+export interface Unit {
+  id?: number,
+  size: number,
+  name: string
+}
+
+export interface ConversionResult {
+  value: number,
+  unit: string
 }
 
 export default App;
