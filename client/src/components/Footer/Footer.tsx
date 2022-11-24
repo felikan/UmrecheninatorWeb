@@ -6,7 +6,7 @@ interface Props {
   onLöschinieren: () => Promise<void>;
 }
 
-function FooterMain(props: Props) {
+function Footer(props: Props) {
   const inputSizeRef = useRef<HTMLInputElement>(null);
   const inputNameRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +24,8 @@ function FooterMain(props: Props) {
           })
         } 
         id="Test"
-        disabled={disabled}>
+        disabled={disabled}
+      >
         Einheit hinzufüginieren
       </button>
       <input
@@ -53,4 +54,4 @@ function FooterMain(props: Props) {
   );
 }
 
-export default FooterMain;
+export default Footer;
