@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger UI",
+    "description": "API for Umrecheninator",
+    "version": "0.0.69"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Database connection",
+      "description": "Functions for communicating with the db",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/api/getAll": {
+      "get": {
+        "tags": ["Database connection"],
+        "summary": "Get all existing entries",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Unit"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unit not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/insert": {
+      "post": {
+        "tags": ["Database connection"],
+        "summary": "Writes a new entry to the db and returns the new list of units in the db",
+        "parameters": [
+          {
+            "name": "unit",
+            "in": "body",
+            "description": "Unit object which will be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Unit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Unit"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid unit object"
+          }
+        }
+      }
+    },
+    "/api/del/{id}": {
+      "post": {
+        "tags": ["Database connection"],
+        "summary": "Deletes the entry with the given id and returns the new list of units in the db",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Unit"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Unit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "name": {
+            "nullable": false,
+            "type": "string",
+            "example": "m"
+          },
+          "size": {
+            "nullable": false,
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        },
+        "required": ["name", "size"]
+      }
+    }
+  }
+}

@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
-import { deleteUnit, getAllUnits, saveUnit } from '../Controller';
 import Navbar from './Navbar/Navbar';
 import Content from './Content/Content';
 import Footer from './Footer/Footer';
 import audioeffects from '../assets/audioeffects.json';
+import { Client, Unit } from '../Controller';
 
 function mapInputs(units: Unit[], input: InputValue): ConversionResult[] {
     return units.map(({ size, name }) => ({ value: (input.value * input.size) / size, unit: name } as ConversionResult));
 }
 
 function App() {
+    const _client = new Client();
+
     let [allUnits, setAllUnits] = useState<Unit[]>([]);
     const [inputValue, setInputValue] = useState<InputValue>({ value: 0, size: 1 });
 
     useEffect(() => {
         async () => {
-            setAllUnits(await getAllUnits());
+            setAllUnits(await _client.getAll());
         };
     });
 
@@ -28,8 +30,7 @@ function App() {
     const onHinzufüginierung = async (unit: Unit) => {
         if (allUnits.includes(unit)) return;
 
-        await saveUnit(unit);
-        setAllUnits(await getAllUnits());
+        setAllUnits(await _client.insert(unit));
 
         audioeffects.map((e) => {
             if (unit.name === e.name) new Audio(e.source).play();
@@ -37,8 +38,7 @@ function App() {
     };
 
     const onLöschinieren = async () => {
-        await deleteUnit(allUnits.length - 1);
-        setAllUnits(await getAllUnits());
+        setAllUnits(await _client.del(allUnits.length - 1));
     };
 
     return (
@@ -51,12 +51,6 @@ function App() {
 }
 
 export default App;
-
-export interface Unit {
-    id?: number;
-    size: number;
-    name: string;
-}
 
 export interface InputValue {
     value: number;

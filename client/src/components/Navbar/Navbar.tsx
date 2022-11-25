@@ -33,10 +33,9 @@ function Navbar(props: Props) {
         <>
             <header className="is-flex">
                 <input ref={inputValueRef} type="number" pattern="[0-9]+" id="value" />
+                // TODO: start with m and let the selection change
                 <select value={selectValue} onChange={(e) => setSelect(e)} id="dropdown">
-                    {Object.keys(Options).map((x) => (
-                        <option value={x}>{x}</option>
-                    ))}
+                    {Object.keys(Options).map((x) => OptionComponent(x))}
                 </select>
                 <button
                     onClick={(e) =>
@@ -59,6 +58,13 @@ function Navbar(props: Props) {
             </div>
         </>
     );
+}
+
+function OptionComponent(option: string) {
+    if (isNaN(parseFloat(option))) {
+        return <option value={option}>{option}</option>;
+    }
+    return;
 }
 
 enum Options {
