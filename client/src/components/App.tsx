@@ -34,7 +34,7 @@ function App() {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
 
     axios
-      .get("http://localhost:8080/api/getAll")
+      .get("https://umrecheninator.de/api/getAll")
       .then((res) => {
         setAllUnits(res.data);
         setAllUnitsID(res.data);
@@ -48,7 +48,7 @@ function App() {
       newInputSizeRef: newInputSizeRef.current!.value,
     };
     axios
-      .post("http://localhost:8080/api/insert", newUnit)
+      .post("https://umrecheninator.de/api/insert", newUnit)
       .then((res) => {
         setAllUnits((prevState) => prevState.slice(0, -1));
         setAllUnits((prevState) => [...prevState, res.data]);
@@ -134,7 +134,7 @@ function App() {
 
     axios
       .delete(
-        `http://localhost:8080/api/del/${allUnits[allUnits.length - 1]._id}`
+        `https://umrecheninator.de/api/del/${allUnits[allUnits.length - 1]._id}`
       )
       .then()
       .catch((err) => console.log(err));

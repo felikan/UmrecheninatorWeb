@@ -21,7 +21,7 @@ function AktivinierungsZeichenkettenUndTolleMusik() {
       source: "/Katzenklo.mp3",
     },
     {
-      name: "KrosseKrabbePizza",
+      name: "Krosse Krabbe Pizza",
       source: "/KrosseKrabbePizza.mp3",
     },
   ];
