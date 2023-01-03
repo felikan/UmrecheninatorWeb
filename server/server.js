@@ -40,6 +40,7 @@ app.use('/api-docs', swaggerUi.serveFiles(null, options), swaggerUi.setup(null, 
 
 app.listen(PORT, () => {
     console.log(`Server at ${PORT}`);
+    console.log('Documentation: http://127.0.0.1:8080/api-docs/');
 });
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/../client/dist/index.html'));

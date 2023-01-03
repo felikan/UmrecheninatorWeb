@@ -12,13 +12,6 @@ function mapInputs(units: Unit[], input: InputValue): ConversionResult[] {
 function App() {
     const _client = new Client();
 
-    let [allUnits, setAllUnits] = useState<Unit[]>([]);
-    const [inputValue, setInputValue] = useState<InputValue>({ value: 0, size: 1 });
-
-    useEffect(() => {
-        _client.getAll().then((data) => setAllUnits(data));
-    }, []);
-
     function onErleuchtinierung(input: InputValue) {
         if (input.value === 420) new Audio('/Microwave.mp3').play();
 
@@ -35,9 +28,16 @@ function App() {
         });
     }
 
-    const onLöschinieren = async () => {
+    async function onLöschinieren() {
         setAllUnits(await _client.del(allUnits.length - 1));
-    };
+    }
+
+    let [allUnits, setAllUnits] = useState<Unit[]>([]);
+    const [inputValue, setInputValue] = useState<InputValue>({ value: 0, size: 1 });
+
+    useEffect(() => {
+        _client.getAll().then((data) => setAllUnits(data));
+    }, []);
 
     return (
         <>
