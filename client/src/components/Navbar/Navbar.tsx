@@ -1,9 +1,17 @@
 import { useRef, useState } from 'react';
 import { InputValue } from '../App';
+import Select from 'react-select';
 
-function getOptionsValueByKey(value: string): Options {
-    return Object.entries(Options).find(([key, _]) => key === value)?.[1] as Options;
+interface Option {
+    value: number;
+    label: String;
 }
+
+let options: Option[] = [
+    { value: 0.01, label: 'cm' },
+    { value: 1, label: 'm' },
+    { value: 1000, label: 'km' }
+];
 
 interface Props {
     onErleuchtinierung: (input: InputValue, event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -20,12 +28,7 @@ function Navbar(props: Props) {
     };
 
     const inputValueRef = useRef<HTMLInputElement>(null);
-    const [selectValue, setSelectValue] = useState<Options>(Options.m);
-
-    const setSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        e.preventDefault();
-        setSelectValue(getOptionsValueByKey(e.target.value));
-    };
+    let [sizeValue, setSizeValue] = useState<number>(1);
 
     let disabled = inputValueRef.current?.value ? true : false;
 
@@ -33,16 +36,19 @@ function Navbar(props: Props) {
         <>
             <header className="is-flex">
                 <input ref={inputValueRef} type="number" pattern="[0-9]+" id="value" />
-                // TODO: start with m and let the selection change
-                <select value={selectValue} onChange={(e) => setSelect(e)} id="dropdown">
-                    {Object.keys(Options).map((x) => OptionComponent(x))}
-                </select>
+                <Select
+                    className="selectComponent"
+                    classNamePrefix="select"
+                    options={options}
+                    defaultValue={options.filter((x) => x.label === 'm')[0]}
+                    onChange={(e) => setSizeValue(e!.value)}
+                />
                 <button
                     onClick={(e) =>
                         props.onErleuchtinierung(
                             {
                                 value: parseFloat(inputValueRef.current!.value),
-                                size: selectValue
+                                size: sizeValue
                             },
                             e
                         )
@@ -58,19 +64,6 @@ function Navbar(props: Props) {
             </div>
         </>
     );
-}
-
-function OptionComponent(option: string) {
-    if (isNaN(parseFloat(option))) {
-        return <option value={option}>{option}</option>;
-    }
-    return;
-}
-
-enum Options {
-    cm = 0.01,
-    m = 1,
-    km = 1000
 }
 
 export default Navbar;

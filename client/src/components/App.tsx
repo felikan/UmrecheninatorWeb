@@ -16,18 +16,16 @@ function App() {
     const [inputValue, setInputValue] = useState<InputValue>({ value: 0, size: 1 });
 
     useEffect(() => {
-        async () => {
-            setAllUnits(await _client.getAll());
-        };
-    });
+        _client.getAll().then((data) => setAllUnits(data));
+    }, []);
 
-    const onErleuchtinierung = (input: InputValue) => {
+    function onErleuchtinierung(input: InputValue) {
         if (input.value === 420) new Audio('/Microwave.mp3').play();
 
         setInputValue(input);
-    };
+    }
 
-    const onHinzufüginierung = async (unit: Unit) => {
+    async function onHinzufüginierung(unit: Unit) {
         if (allUnits.includes(unit)) return;
 
         setAllUnits(await _client.insert(unit));
@@ -35,7 +33,7 @@ function App() {
         audioeffects.map((e) => {
             if (unit.name === e.name) new Audio(e.source).play();
         });
-    };
+    }
 
     const onLöschinieren = async () => {
         setAllUnits(await _client.del(allUnits.length - 1));
