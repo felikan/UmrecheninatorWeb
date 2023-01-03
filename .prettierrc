@@ -1,0 +1,16 @@
+{
+  "printWidth": 160,
+  "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSpacing": true,
+  "trailingComma": "none",
+  "semicolons": true,
+  "overrides": [
+    {
+      "files": ["*.html", "*.scss", "*.css", "*.tsx", "*.js", "*.ts"],
+      "options": { "tabWidth": 4 }
+    }
+  ]
+}
