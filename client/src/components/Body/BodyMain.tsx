@@ -21,7 +21,7 @@ function BodyMain(props: Props) {
           inputValueUnitOptions={props.inputValueUnitOptions}
         />
       </table>
-      <img src={Doofi} alt="" />
+      <img id="doof" src={Doofi} alt="" />
     </div>
   );
 }
