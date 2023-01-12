@@ -42,6 +42,15 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  const getRandomColor = () => {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   const onSubmitNewInput = () => {
     const newUnit = {
       newInputUnitRef: newInputUnitRef.current!.value,
@@ -93,6 +102,29 @@ function App() {
         audio.play();
       }
     });
+
+    switch (newInputUnitRef.current!.value) {
+      case "Regenbogen":
+      case "regenbogen":
+        setInterval(function () {
+          let tableElements = document.getElementsByTagName("tbody");
+          let buttons = document.getElementsByTagName("button");
+          let inputs = document.getElementsByTagName("input");
+          for (let i = 0; i < tableElements.length; i++) {
+            tableElements[i].style.color = getRandomColor();
+          }
+          for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.color = getRandomColor();
+            buttons[i].style.backgroundColor = getRandomColor();
+          }
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.backgroundColor = getRandomColor();
+          }
+        }, 50);
+        break;
+      default:
+    }
+
     const newArray = [...allUnits];
     var isDuplicate = false;
 

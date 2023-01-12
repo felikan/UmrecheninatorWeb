@@ -1,14 +1,15 @@
-const isNumber = require("./helpers/isNumber")
+const isNumber = require("./helpers/isNumber");
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const path = require("path");
-const mongoString =
-  "mongodb+srv://Umrecheninator:AXD1UnkGacxcPC9T@umrecheninator.ftcsi2x.mongodb.net/umrecheninatorUnits";
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 //database
-mongoose.connect(mongoString);
+mongoose.connect(process.env.DB_URL);
 const database = mongoose.connection;
 const Model = require("./models/model");
 
@@ -19,7 +20,6 @@ database.on("error", (error) => {
 database.once("connected", () => {
   console.log("Database Connected");
 });
-
 
 //server
 const app = express();
