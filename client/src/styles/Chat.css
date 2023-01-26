@@ -1,0 +1,3 @@
+#messages .chatMsg:nth-child(2n) {
+  background-color: lightgray;
+}

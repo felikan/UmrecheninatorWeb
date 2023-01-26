@@ -5,6 +5,15 @@ const bodyParser = require("body-parser");
 var cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const { WebSocketServer } = require("ws");
+const http = require("http");
+
+const server = http.createServer();
+const wsServer = new WebSocketServer({ server });
+const port = 8000;
+server.listen(port, () => {
+  console.log(`WebSocket server is running on port ${port}`);
+});
 
 dotenv.config();
 
@@ -21,6 +30,37 @@ database.once("connected", () => {
   console.log("Database Connected");
 });
 
+//WsServer
+let messages = [];
+wsServer.on("connection", function (connection) {
+  console.log(`Recieved a new connection.`);
+  connection.send(
+    JSON.stringify({
+      type: "allMessages",
+      body: messages,
+    })
+  );
+
+  connection.on("message", (message) => {
+    messages.push(message.toString());
+    wsServer.broadcast(message.toString());
+  });
+  connection.on("close", () => {
+    console.log("Connection closed");
+  });
+});
+
+wsServer.broadcast = function broadcast(msg) {
+  wsServer.clients.forEach(function each(client) {
+    client.send(
+      JSON.stringify({
+        type: "newMessage",
+        body: msg,
+      })
+    );
+  });
+};
+
 //server
 const app = express();
 const PORT = 8080 || process.env.PORT;
@@ -33,7 +73,7 @@ app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
+  res.send("hi");
 });
 app.get("/api/getAll", async (req, res) => {
   try {

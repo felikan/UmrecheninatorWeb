@@ -1,5 +1,5 @@
-import React from "react";
 import Doofi from "../../assets/img/Doofi.png";
+import Chat from "../Chat/Chat";
 import Units from "./BodyUnitContainer/Units";
 
 interface Props {
@@ -22,6 +22,7 @@ function BodyMain(props: Props) {
         />
       </table>
       <img src={Doofi} alt="" />
+      <Chat></Chat>
     </div>
   );
 }
