@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 var cors = require("cors");
 const path = require("path");
 const mongoString =
-  "mongodb+srv://Umrecheninator:AXD1UnkGacxcPC9T@umrecheninator.ftcsi2x.mongodb.net/umrecheninatorUnits";
+  "mongodb+srv://Umrecheninator:iats6DFETOe1s1Oj@umrecheninator.ftcsi2x.mongodb.net/umrecheninatorUnits";
 
 //database
 mongoose.connect(mongoString);
