@@ -43,12 +43,7 @@ function App() {
         setAllUnitsID(res.data);
       })
       .catch((err) => console.log(err));
-    axios
-      .get("https://umrecheninator.de/api/generate")
-      .then(() =>{
-        onGenerate();
-      })
-      .catch((err) => console.log(err));
+    onGenerate();
     
   }, []);
 
@@ -80,10 +75,10 @@ function App() {
 
   const onGenerate =  () => {
     axios
-      .get("https://umrecheninator.de/api/generate")
+      .get("http://127.0.0.1:3000/api/generate")
       .then((res) =>{
         const data = res.data;
-
+        console.log(data)
         const formattedData = {
           unitName: data.result.split("\n")[0].trim(),
           unitSize: parseFloat(data.result.split("\n")[1].replace("unitSize: ", "").trim())
