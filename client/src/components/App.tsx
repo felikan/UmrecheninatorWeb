@@ -16,12 +16,11 @@ function App() {
     { _id: string; unitName: string; unitSize: number }[]
   >([]);
   const [allUnitsID, setAllUnitsID] = useState<
-    { id: string; unitName: string; unitSize: number }[]
+    { unitName: string; unitSize: number }[]
   >([]);
 
   const [inputValue, setInputValue] = useState<number>(0);
   const [optionActive, setOptionActive] = useState<number>(1);
-
   const [inputValueUnitOptions, setInputValueUnitOptions] = useState<
     { value: number; label: string }[]
   >([
@@ -29,6 +28,10 @@ function App() {
     { value: 1, label: "m" },
     { value: 0.01, label: "cm" },
   ]);
+
+  const [generatedUnit, setGeneratedUnit] = useState<
+  { unitName: string; unitSize: number }
+  >();
 
   useEffect(() => {
     // fetch("http://localhost:1024/api/getAll").then((res => res.json())).then(data => {setBackendData(data)})
@@ -40,6 +43,13 @@ function App() {
         setAllUnitsID(res.data);
       })
       .catch((err) => console.log(err));
+    axios
+      .get("http://127.0.0.1:3000/api/generate")
+      .then(() =>{
+        onGenerate();
+      })
+      .catch((err) => console.log(err));
+    
   }, []);
 
   const onSubmitNewInput = () => {
@@ -66,6 +76,21 @@ function App() {
     }
 
     setInputValue(parseFloat(inputValueRef.current.value));
+  };
+
+  const onGenerate =  () => {
+    axios
+      .get("http://127.0.0.1:3000/api/generate")
+      .then((res) =>{
+        const data = res.data;
+
+        const formattedData = {
+          unitName: data.result.split("\n")[0].trim(),
+          unitSize: parseFloat(data.result.split("\n")[1].replace("unitSize: ", "").trim())
+        };
+        setGeneratedUnit(formattedData)
+      })
+      .catch((err) => console.log(err));
   };
 
   const onSelectChange = (e: any) => {
@@ -144,10 +169,12 @@ function App() {
       <NavMain
         inputValueRef={inputValueRef}
         onErleuchtinierung={onErleuchtinierung}
+        onGenerate={onGenerate}
         onSelectChange={onSelectChange}
         inputValueUnitOptions={inputValueUnitOptions}
-        selectRef={selectRef}
-      />
+        selectRef={selectRef} 
+        onHinzufüginierung={onHinzufüginierung}
+        generatedUnit={generatedUnit}      />
       <BodyMain
         allUnits={allUnits}
         optionActive={optionActive}
