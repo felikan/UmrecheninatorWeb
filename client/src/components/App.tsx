@@ -44,7 +44,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     axios
-      .get("http://127.0.0.1:3000/api/generate")
+      .get("https://umrecheninator.de/api/generate")
       .then(() =>{
         onGenerate();
       })
@@ -80,7 +80,7 @@ function App() {
 
   const onGenerate =  () => {
     axios
-      .get("http://127.0.0.1:3000/api/generate")
+      .get("https://umrecheninator.de/api/generate")
       .then((res) =>{
         const data = res.data;
 

@@ -3,8 +3,6 @@ import React from "react";
 interface Props {
   newInputSizeRef: React.Ref<HTMLInputElement>;
   newInputUnitRef: React.Ref<HTMLInputElement>;
-  unitInput: any;
-  sizeInput: any;
   onHinzufüginierung: () => void;
   onLöschinieren: () => void;
 }
@@ -18,14 +16,12 @@ function FooterMain(props: Props) {
       <input
         ref={props.newInputUnitRef}
         type="text"
-        value={props.unitInput}
         placeholder="Einheit"
         id="nameIn"
       />
       <input
         ref={props.newInputSizeRef}
         type="number"
-        value={props.sizeInput}
         placeholder="Größe in Meter"
         id="sizeIn"
       />
