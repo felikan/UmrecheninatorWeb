@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Warenkorb - Amazon</title>
+	<link rel="stylesheet" href="Warenkorb_style.css">
+</head>
+<body>
+	<header>
+        <form>
+            <li><a href="https://umrecheninator.de"><img src="Logo1_shop.png" alt="Logo_shop"></a></li>
+            <li><a><input type="text" placeholder="Suchen...">
+            <button type="submit">Suchen</button></a></li>
+          </form>
+          <nav>
+            <ul>
+              <li><a href="#">Alle Kategorien</a></li>
+              <li><a href="#">Doof Marketplace</a></li>
+              <li><a href="#">Doof Merch</a></li>
+              <li><a href="#">Bestseller</a></li>
+              <li><a href="#">Neuheiten</a></li>
+              <li><a href="#">Angebote</a></li>
+              <li><a href="#">Kundenservice</a></li>
+              <b><a href="#">Warenkorb</a></b>
+            </ul>
+          </nav>
+	</header>
+
+	<main>
+		<div class="container">
+			<h1>Warenkorb</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>Produkt</th>
+						<th>Beschreibung</th>
+						<th>Menge</th>
+						<th>Preis</th>
+						<th>Gesamtpreis</th>
+						<th>Aktionen</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><img src="product1.jpg" alt="Produkt 1"></td>
+						<td>Produkt 1 Beschreibung</td>
+						<td><input type="number" min="1" value="1"></td>
+						<td>€19.99</td>
+						<td>€19.99</td>
+						<td><button>Entfernen</button></td>
+					</tr>
+					<tr>
+						<td><img src="product2.jpg" alt="Produkt 2"></td>
+						<td>Produkt 2 Beschreibung</td>
+						<td><input type="number" min="1" value="1"></td>
+						<td>€12.99</td>
+						<td>€12.99</td>
+						<td><button>Entfernen</button></td>
+					</tr>
+					<!-- Weitere Produkte -->
+				</tbody>
+			</table>
+
+			<div class="total">
+				<p>Gesamtsumme: <span>€32.98</span></p>
+				<button>Weiter zur Kasse</button>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<!-- Footer Code -->
+	</footer>
+</body>
+</html>

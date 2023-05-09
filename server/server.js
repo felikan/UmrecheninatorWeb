@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 var cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const fs = require('fs');
 dotenv.config();
 
 
@@ -55,13 +56,37 @@ app.get("/api/getAll", async (req, res) => {
     units.map((unit) => {
       unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
     });
-app.get("/shop", (req, res) => { res.sendFile(path.join(__dirname, "/../client/dist/DIE_SHOP_SEITE.html")); });
+app.get("/shop", (req, res) => { res.sendFile(path.join(__dirname, "/../onlineshop/DIE_SHOP_SEITE.html")); });
 
     res.json(units);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
+//Bestellung von Onlineshop
+app.post('/orders', (req, res) => {
+  const order = req.body;
+  console.log(`Bestellung empfangen: ${JSON.stringify(order)}`);
+  fs.readFile('orders.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Interner Serverfehler');
+    }
+    let orders = JSON.parse(data);
+    orders.push(order);
+    fs.writeFile('orders.json', JSON.stringify(orders), 'utf8', (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Interner Serverfehler');
+      }
+      console.log('Bestellung gespeichert');
+      return res.status(200).send('Bestellung erfolgreich');
+    });
+  });
+});
+
+app.listen(3000, () => console.log('Server gestartet'));
 
 app.post("/api/insert", async (req, res) => {
   if (!isNumber(req.body.newInputSizeRef)) return;

@@ -4,7 +4,7 @@
     <title>OnlineShop für Doofenschmirtz</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="DIE_SHOP_SEITE_style.css">
     <style>
         /* body {
             background-image: url('https://media.tenor.com/mpZ3voM9MncAAAAd/perry-the-platypus-animal.gif');
@@ -15,7 +15,7 @@
   <body>
     <header>
       <form>
-        <li><a><img src="Logo1_shop.png" alt="Logo_shop"></a></li>
+        <li><a href="https://umrecheninator.de"><img src="Logo1_shop.png" alt="Logo_shop"></a></li>
         <li><a><input type="text" placeholder="Suchen...">
         <button type="submit">Suchen</button></a></li>
       </form>
@@ -28,7 +28,7 @@
           <li><a href="#">Neuheiten</a></li>
           <li><a href="#">Angebote</a></li>
           <li><a href="#">Kundenservice</a></li>
-          <b href="#">Warenkorb</a></b>
+          <b><a href="#">Warenkorb</a></b>
         </ul>
       </nav>
     </header>
@@ -42,7 +42,7 @@
                 <h3>AK-47 Nightwish</h3>
                 <p>Premium CSGO Skin.</p>
                 <p class="price">Preis: 1200 $</p>
-                <button>Kaufen</button>
+                <button onclick="window.location.href='https:'">Kaufen</button>
             </div>
             <div class="product-card">
                 <img src="Desert Eagle Ocean Drive.jpg" alt="Desert Eagle Ocean Drive">
@@ -130,9 +130,37 @@
     </main>
 
     <footer>
-      <p>&copy; Umrecheninator 2023</p>
+      <div class="container">
+          <div class="column">
+            <h4>Kontakt</h4>
+            <p>123 Ballermann<br>
+               69691 Malle<br>
+               Telefon: 6969/696969<br>
+               E-Mail: Umrecheniator@shop.de</p>
+          </div>
+          <div class="column">
+            <h4>Informationen</h4>
+            <ul>
+              <li><a href="#">Versandinformationen</a></li>
+              <li><a href="#">Rückgabebedingungen</a></li>
+              <li><a href="#">Datenschutzrichtlinien</a></li>
+            </ul>
+          </div>
+          <div class="column">
+            <h4>Folgen Sie uns</h4>
+            <ul class="social">
+              <li><a href="#"><img src="2021_Facebook_icon.svg - Kopie.png" alt="Facebook_Logo"></a></li>
+              <li><a href="#"><img src="Instagram_logo_2022.svg - Kopie.png" alt="Instagram_Logo"></a></li>
+              <li><a href="#"><img src="Twitter_Social_Icon_Circle_Color - Kopie.png" alt="Twitter_Logo"></a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <p class="text-center">&copy; 2023 Umrecheniator-Shop. Alle Rechte vorbehalten.</p>
+      </div>
     </footer>
+    
 
-    <script src="script.js"></script>
+    <script src="functionality.js"></script>
   </body>
 </html>

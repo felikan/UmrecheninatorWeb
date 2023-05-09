@@ -1,14 +1,4 @@
-/* Globale Stile */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    /* background-image: url('https://media.tenor.com/mpZ3voM9MncAAAAd/perry-the-platypus-animal.gif') ;
-    background-size: cover; */
-  }
-  
+/*Header*/
   /* Header */
   header {
     background-color: #232f3e;
@@ -91,76 +81,94 @@ body {
     margin-left: 100px;
   }
   
-  /* Hauptinhalt */
-  main {
-    margin: 20px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+
+/* Allgemeine Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
   }
   
-  section {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 32px;
     margin-bottom: 20px;
   }
   
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
   }
   
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 20px;
-  }
-
-  .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
   }
   
-  .product-card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    text-align: center;
-    width: 300px;
-    height: 400px;
+  table th {
+    font-weight: bold;
   }
   
-  .product-card img {
-    max-width: 100%;
+  table td img {
+    max-width: 80px;
+    margin-right: 10px;
   }
   
-  .product-card h2 {
-    font-size: 1.5rem;
-    margin: 10px 0;
+  table td input {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
   }
   
-  .product-card p {
-    font-size: 1rem;
-    margin: 10px 0;
-  }
-  
-  .product-card button {
+  table td button {
     background-color: #e4920f;
+    color: #fff;
     border: none;
-    color: white;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    margin-top: 10px;
+    border-radius: 3px;
     cursor: pointer;
   }
   
-    
-    /* Footer */
-    footer {
-    background-color: #232f3e;
-    color: #fff;
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
     padding: 20px;
-    text-align: center;
-    } 
+  }
+  
+  .total p {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .total span {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  button {
+    background-color: #e4920f;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #e4920f;
+  }
+  
   
