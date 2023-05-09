@@ -55,6 +55,7 @@ app.get("/api/getAll", async (req, res) => {
     units.map((unit) => {
       unitsFormat.push({ unitName: unit.unitName, unitSize: unit.unitSize });
     });
+app.get("/shop", (req, res) => { res.sendFile(path.join(__dirname, "/../client/dist/DIE_SHOP_SEITE.html")); });
 
     res.json(units);
   } catch (error) {

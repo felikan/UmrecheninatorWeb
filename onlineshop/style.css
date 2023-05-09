@@ -1,0 +1,166 @@
+/* Globale Stile */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    /* background-image: url('https://media.tenor.com/mpZ3voM9MncAAAAd/perry-the-platypus-animal.gif') ;
+    background-size: cover; */
+  }
+  
+  /* Header */
+  header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 20px;
+  }
+
+  header img {
+    width: 100px;
+    height: 100px;
+    margin-right: 100px;
+  }
+
+  form {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+  }
+
+  form li {
+    display: inline-block;
+    margin-right: 575px;
+    margin-left: 0px;
+  }
+
+
+    /* Styling für das Texteingabefeld */
+  input[type="text"] {
+    padding: 8px; /* Padding innerhalb des Textfelds */
+    font-size: 16px; /* Schriftgröße innerhalb des Textfelds */
+    border: none; /* Keine Grenze um das Textfeld */
+    border-bottom: 2px solid #ccc; /* Unterstreichung unterhalb des Textfelds */
+  }
+
+	/* Styling für den Submit-Button */
+  button[type="submit"] {
+    background-color: #4CAF50; /* Hintergrundfarbe des Submit-Buttons */
+    color: white; /* Schriftfarbe des Submit-Buttons */
+    padding: 8px 16px; /* Padding innerhalb des Submit-Buttons */
+    border: none; /* Keine Grenze um den Submit-Button */
+    border-radius: 4px; /* Runde Ecken des Submit-Buttons */
+    cursor: pointer; /* Zeiger ändert sich beim Überfahren des Buttons */
+  }
+
+    /* Styling für den Submit-Button, wenn der Mauszeiger über dem Button ist */
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin-left: 310px;
+    margin-bottom: 0px;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-right: 60px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  nav a:hover {
+    color: #e4920f;
+  }
+
+  nav b {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-left: 100px;
+  }
+  
+  /* Hauptinhalt */
+  main {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+
+  .product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    height: 400px;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+  }
+  
+  .product-card h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+  
+  .product-card p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .product-card button {
+    background-color: #e4920f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+    
+    /* Footer */
+    footer {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    } 
+  
