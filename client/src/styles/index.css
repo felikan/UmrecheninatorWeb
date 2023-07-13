@@ -12,6 +12,7 @@ header {
 }
 #hr {
     margin-top: -1rem;
+    display: none;
   }
 body{
     font-size: large;
@@ -41,9 +42,12 @@ footer {
 
 #generate {
     margin-left: 12vw;
+    display: none;
 }
 #generateUnit {
-    margin-left: 0.5rem
+    margin-left: 0.5rem;
+    display: none;
+
 }
 
 #Test {
@@ -68,6 +72,7 @@ footer {
     border-collapse: separate;
     border-spacing: 1.5vh;
     overflow-y: auto;
+    overflow:visible;
     display: block;
     height: 100%;
     max-width: 70%;

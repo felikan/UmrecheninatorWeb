@@ -7,10 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Der beste Einheiten-Umrechinierer der Tri-State Area">
     <meta name="robots" contents="noodp,noydir"/>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <title>Umrecheninator</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div style="display: flex;">
+    <div style="width:50vw;" id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <model-viewer
+    id="doof"
+    style="width: 60vw; height: 100vh" 
+    src="./src/assets/drdoof.glb"
+    shadow-intensity="1"
+    camera-controls touch-action="pan-y"
+    interaction-prompt="none"
+    auto-rotate rotation-per-second="45deg">
+  </model-viewer>
+  </div> 
   </body>
 </html>
+
+<script>
+  const modelViewerParameters = document.querySelector("model-viewer#doof");
+  modelViewerParameters.addEventListener("load", (ev) => {
+    let material = modelViewerParameters.model.materials[0];
+    let roughnessDisplay = document.querySelector("#roughness-value");
+    material.pbrMetallicRoughness.setRoughnessFactor(1);
+  });
+</script>

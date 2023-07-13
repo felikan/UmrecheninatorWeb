@@ -1,5 +1,4 @@
 import React from "react";
-import Doofi from "../../assets/img/Doofi.png";
 import Units from "./BodyUnitContainer/Units";
 
 interface Props {
@@ -21,7 +20,6 @@ function BodyMain(props: Props) {
           inputValueUnitOptions={props.inputValueUnitOptions}
         />
       </table>
-      <img src={Doofi} id="doof" alt="" />
     </div>
   );
 }
