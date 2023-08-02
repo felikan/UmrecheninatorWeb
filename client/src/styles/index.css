@@ -65,17 +65,18 @@ footer {
 #container {
     display: flex;
     flex-direction: row;
-    height: 80vh;
+    height: 85vh;
+    max-width: 60vw;
 }
 #output{
     font-size: 22px;
     border-collapse: separate;
     border-spacing: 1.5vh;
     overflow-y: auto;
-    overflow:visible;
+    overflow-x: scroll;
+    overflow-y:visible;
+    overflow-x: hidden;
     display: block;
-    height: 100%;
-    max-width: 70%;
 }
 #doof {
     width: 50vw;
